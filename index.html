@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BelezaPro - Sistema de Gerenciamento para Salões de Beleza</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Seção Hero -->
+    <header class="landing-hero">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="assets/img/logo.svg" alt="BelezaPro" height="40">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#recursos">Recursos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#planos">Planos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#depoimentos">Depoimentos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contato">Contato</a>
+                        </li>
+                        <li class="nav-item ms-lg-3">
+                            <a class="btn btn-outline-light" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Entrar</a>
+                        </li>
+                        <li class="nav-item ms-lg-2">
+                            <a class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#registerModal">Começar Grátis</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-6 text-lg-start text-center">
+                    <h1 class="hero-title mb-4">Gerencie seu salão com eficiência e elegância</h1>
+                    <p class="hero-subtitle mb-4">Software completo para gestão de agenda, clientes, profissionais, serviços e finanças do seu salão de beleza ou barbearia.</p>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn btn-primary btn-lg me-2" data-bs-toggle="modal" data-bs-target="#registerModal">Experimente Grátis</a>
+                        <a href="#recursos" class="btn btn-outline-light btn-lg">Ver Recursos</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block">
+                    <img src="assets/img/salon-bg.jpg" alt="BelezaPro Dashboard" class="img-fluid hero-image">
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-shape-1"></div>
+        <div class="hero-shape-2"></div>
+    </header>
+
+    <!-- Seção Benefícios -->
+    <section class="features-section py-5">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-lg-8 mx-auto">
+                    <span class="section-badge">BENEFÍCIOS</span>
+                    <h2 class="section-title">Por que escolher o BelezaPro?</h2>
+                    <p class="section-subtitle">Veja como nosso sistema irá transformar a gestão do seu negócio</p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-calendar-check"></i>
+                        </div>
+                        <h3>Agenda Inteligente</h3>
+                        <p>Tenha controle total da agenda com visualização diária, semanal e mensal. Evite conflitos de horários e aumente sua produtividade.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <h3>Gestão de Clientes</h3>
+                        <p>Mantenha todas as informações dos seus clientes organizadas: histórico, preferências e comunicação em um só lugar.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-graph-up"></i>
+                        </div>
+                        <h3>Controle Financeiro</h3>
+                        <p>Monitore entradas, saídas, comissões e lucros com relatórios claros e visuais, facilitando sua tomada de decisões.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-phone"></i>
+                        </div>
+                        <h3>Acessível em Qualquer Lugar</h3>
+                        <p>App completo disponível para desktop, tablet e smartphones. Gerencie seu salão de qualquer lugar com acesso à internet.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-bell"></i>
+                        </div>
+                        <h3>Lembretes Automáticos</h3>
+                        <p>Reduza faltas com confirmações e lembretes automáticos enviados para seus clientes antes dos agendamentos.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h3>Segurança de Dados</h3>
+                        <p>Seus dados estão seguros com criptografia avançada e backup automático em nuvem, garantindo tranquilidade.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Recursos -->
+    <section id="recursos" class="resources-section py-5 bg-light">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-lg-8 mx-auto">
+                    <span class="section-badge">RECURSOS</span>
+                    <h2 class="section-title">Funcionalidades completas para seu salão</h2>
+                    <p class="section-subtitle">Tudo o que você precisa para gerenciar seu negócio com modernidade e eficiência</p>
+                </div>
+            </div>
+
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-6 order-lg-1 order-2">
+                    <div class="resource-content">
+                        <h3>Agenda Completa e Personalizada</h3>
+                        <p class="mb-4">Organize seu dia a dia com uma visão clara e funcional de todos os agendamentos. Personalize de acordo com suas necessidades.</p>
+                        <ul class="resource-list">
+                            <li><i class="bi bi-check-circle"></i> Visualização diária, semanal e mensal</li>
+                            <li><i class="bi bi-check-circle"></i> Agendamento recorrente</li>
+                            <li><i class="bi bi-check-circle"></i> Bloqueio de horários para intervalos</li>
+                            <li><i class="bi bi-check-circle"></i> Confirmação automática</li>
+                            <li><i class="bi bi-check-circle"></i> Histórico completo de atendimentos</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-2 order-1 mb-4 mb-lg-0">
+                    <img src="assets/img/salon-bg.jpg" alt="Agenda BelezaPro" class="img-fluid resource-image">
+                </div>
+            </div>
+            
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="assets/img/salon-bg.jpg" alt="Clientes BelezaPro" class="img-fluid resource-image">
+                </div>
+                <div class="col-lg-6">
+                    <div class="resource-content">
+                        <h3>Gestão Completa de Clientes</h3>
+                        <p class="mb-4">Mantenha um relacionamento próximo com seus clientes através de um cadastro detalhado com histórico e preferências.</p>
+                        <ul class="resource-list">
+                            <li><i class="bi bi-check-circle"></i> Cadastro detalhado de informações</li>
+                            <li><i class="bi bi-check-circle"></i> Histórico de serviços realizados</li>
+                            <li><i class="bi bi-check-circle"></i> Preferências de atendimento</li>
+                            <li><i class="bi bi-check-circle"></i> Sistema de fidelidade com pontos</li>
+                            <li><i class="bi bi-check-circle"></i> Comunicação direta via WhatsApp</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-1 order-2">
+                    <div class="resource-content">
+                        <h3>Controle Financeiro Intuitivo</h3>
+                        <p class="mb-4">Tenha uma visão clara da saúde financeira do seu negócio com controle de receitas, despesas e comissões.</p>
+                        <ul class="resource-list">
+                            <li><i class="bi bi-check-circle"></i> Dashboard visual de desempenho</li>
+                            <li><i class="bi bi-check-circle"></i> Controle de despesas por categoria</li>
+                            <li><i class="bi bi-check-circle"></i> Cálculo automático de comissões</li>
+                            <li><i class="bi bi-check-circle"></i> Relatórios de faturamento</li>
+                            <li><i class="bi bi-check-circle"></i> Previsão de receitas</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-2 order-1 mb-4 mb-lg-0">
+                    <img src="assets/img/salon-bg.jpg" alt="Financeiro BelezaPro" class="img-fluid resource-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Planos -->
+    <section id="planos" class="pricing-section py-5">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-lg-8 mx-auto">
+                    <span class="section-badge">PLANOS</span>
+                    <h2 class="section-title">Escolha o plano ideal para seu negócio</h2>
+                    <p class="section-subtitle">Opções flexíveis que crescem junto com seu salão</p>
+                </div>
+            </div>
+            
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>Plano Básico</h3>
+                            <div class="pricing-tag">
+                                <span class="currency">R$</span>
+                                <span class="price">0</span>
+                                <span class="period">/mês</span>
+                            </div>
+                            <p>Ideal para profissionais autônomos</p>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li><i class="bi bi-check-circle"></i> Até 5 agendamentos por dia</li>
+                                <li><i class="bi bi-check-circle"></i> 1 profissional</li>
+                                <li><i class="bi bi-check-circle"></i> Cadastro de clientes ilimitado</li>
+                                <li><i class="bi bi-check-circle"></i> Agenda básica</li>
+                                <li><i class="bi bi-check-circle"></i> Cadastro de serviços</li>
+                                <li class="disabled"><i class="bi bi-x-circle"></i> Controle financeiro</li>
+                                <li class="disabled"><i class="bi bi-x-circle"></i> Lembretes automáticos</li>
+                                <li class="disabled"><i class="bi bi-x-circle"></i> Relatórios avançados</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-footer">
+                            <a href="#" class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#registerModal">Começar Grátis</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="pricing-card featured">
+                        <div class="pricing-badge">Mais Popular</div>
+                        <div class="pricing-header">
+                            <h3>Plano Profissional</h3>
+                            <div class="pricing-tag">
+                                <span class="currency">R$</span>
+                                <span class="price">89</span>
+                                <span class="period">/mês</span>
+                            </div>
+                            <p>Perfeito para salões e barbearias</p>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li><i class="bi bi-check-circle"></i> Agendamentos ilimitados</li>
+                                <li><i class="bi bi-check-circle"></i> Até 5 profissionais</li>
+                                <li><i class="bi bi-check-circle"></i> Cadastro de clientes ilimitado</li>
+                                <li><i class="bi bi-check-circle"></i> Agenda completa</li>
+                                <li><i class="bi bi-check-circle"></i> Cadastro de serviços ilimitados</li>
+                                <li><i class="bi bi-check-circle"></i> Controle financeiro completo</li>
+                                <li><i class="bi bi-check-circle"></i> Lembretes automáticos via WhatsApp</li>
+                                <li><i class="bi bi-check-circle"></i> Relatórios gerenciais</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-footer">
+                            <a href="#" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#registerModal">Experimente por 7 dias</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>Plano Premium</h3>
+                            <div class="pricing-tag">
+                                <span class="currency">R$</span>
+                                <span class="price">149</span>
+                                <span class="period">/mês</span>
+                            </div>
+                            <p>Para redes e salões de grande porte</p>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li><i class="bi bi-check-circle"></i> Tudo do Plano Profissional</li>
+                                <li><i class="bi bi-check-circle"></i> Profissionais ilimitados</li>
+                                <li><i class="bi bi-check-circle"></i> Múltiplos pontos de atendimento</li>
+                                <li><i class="bi bi-check-circle"></i> Sistema de fidelidade e pontos</li>
+                                <li><i class="bi bi-check-circle"></i> Integração com sistemas fiscais</li>
+                                <li><i class="bi bi-check-circle"></i> Módulo de vendas de produtos</li>
+                                <li><i class="bi bi-check-circle"></i> Suporte prioritário</li>
+                                <li><i class="bi bi-check-circle"></i> Personalização de marca</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-footer">
+                            <a href="#" class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#registerModal">Experimente por 7 dias</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Depoimentos -->
+    <section id="depoimentos" class="testimonials-section py-5 bg-light">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-lg-8 mx-auto">
+                    <span class="section-badge">DEPOIMENTOS</span>
+                    <h2 class="section-title">O que nossos clientes dizem</h2>
+                    <p class="section-subtitle">Histórias reais de profissionais que transformaram seus negócios com o BelezaPro</p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"O BelezaPro simplificou completamente a gestão do meu salão. O agendamento é prático e rápido, e meus clientes adoram receber lembretes automáticos, o que reduziu nossas faltas em quase 70%!"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <i class="bi bi-person-circle"></i>
+                            </div>
+                            <div class="author-info">
+                                <h5>Ana Souza</h5>
+                                <p>Studio Ana Hair Design</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"Como barbeiro, eu gastava muito tempo organizando minha agenda em papel. Com o BelezaPro, consigo visualizar meu dia em segundos e o controle financeiro me ajudou a entender melhor minha lucratividade real."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <i class="bi bi-person-circle"></i>
+                            </div>
+                            <div class="author-info">
+                                <h5>Carlos Mendes</h5>
+                                <p>Barbearia Vintage</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"Ter todos os dados dos clientes organizados em um só lugar nos permitiu oferecer um atendimento muito mais personalizado. Nossos clientes se sentem especiais e isso tem gerado muito mais fidelidade."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <i class="bi bi-person-circle"></i>
+                            </div>
+                            <div class="author-info">
+                                <h5>Juliana Costa</h5>
+                                <p>Espaço Beleza Total</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção CTA -->
+    <section class="cta-section py-5">
+        <div class="container text-center">
+            <h2 class="mb-4">Pronto para transformar seu salão?</h2>
+            <p class="mb-4">Comece hoje mesmo com nosso período de teste gratuito. Sem compromisso.</p>
+            <a href="#" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#registerModal">Experimente Grátis por 7 Dias</a>
+        </div>
+    </section>
+
+    <!-- Seção Contato -->
+    <section id="contato" class="contact-section py-5 bg-light">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-lg-8 mx-auto">
+                    <span class="section-badge">CONTATO</span>
+                    <h2 class="section-title">Estamos aqui para ajudar</h2>
+                    <p class="section-subtitle">Tire suas dúvidas ou solicite uma demonstração personalizada</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="icon">
+                                <i class="bi bi-envelope"></i>
+                            </div>
+                            <div class="info">
+                                <h5>Email</h5>
+                                <p>contato@belezapro.com.br</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="icon">
+                                <i class="bi bi-whatsapp"></i>
+                            </div>
+                            <div class="info">
+                                <h5>WhatsApp</h5>
+                                <p>(11) 98765-4321</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="icon">
+                                <i class="bi bi-geo-alt"></i>
+                            </div>
+                            <div class="info">
+                                <h5>Endereço</h5>
+                                <p>Av. Paulista, 1000 - São Paulo/SP</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="icon">
+                                <i class="bi bi-clock"></i>
+                            </div>
+                            <div class="info">
+                                <h5>Horário de Atendimento</h5>
+                                <p>Segunda a Sexta: 9h às 18h</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <form class="contact-form">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name" class="form-label">Nome</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="subject" class="form-label">Assunto</label>
+                                    <input type="text" class="form-control" id="subject" required>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="message" class="form-label">Mensagem</label>
+                                    <textarea class="form-control" id="message" rows="5" required></textarea>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="footer-brand">
+                        <img src="assets/img/logo.svg" alt="BelezaPro" height="40">
+                        <p class="mt-3">Sistema completo de gestão para salões de beleza, barbearias e centros de estética.</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                        <a href="#"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-6">
+                    <h5>Links Rápidos</h5>
+                    <ul class="footer-links">
+                        <li><a href="#recursos">Recursos</a></li>
+                        <li><a href="#planos">Planos</a></li>
+                        <li><a href="#depoimentos">Depoimentos</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6">
+                    <h5>Recursos</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Agenda</a></li>
+                        <li><a href="#">Clientes</a></li>
+                        <li><a href="#">Financeiro</a></li>
+                        <li><a href="#">Relatórios</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5>Assine nossa newsletter</h5>
+                    <p>Receba dicas, novidades e promoções especiais.</p>
+                    <form class="newsletter-form">
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Seu e-mail" required>
+                            <button class="btn btn-primary" type="submit">Assinar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">© 2023 BelezaPro - Todos os direitos reservados</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-decoration-none me-3">Termos de Uso</a>
+                    <a href="#" class="text-decoration-none">Política de Privacidade</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Modal de Login -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Entrar no Sistema</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">E-mail</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                <input type="email" class="form-control" id="loginEmail" placeholder="seu@email.com" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between">
+                                <label for="loginPassword" class="form-label">Senha</label>
+                                <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#recoveryModal" data-bs-dismiss="modal">Esqueceu a senha?</a>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                <input type="password" class="form-control" id="loginPassword" required>
+                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Lembrar meus dados</label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <p class="mb-0">Não tem uma conta? <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal" class="text-decoration-none">Cadastre-se</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Recuperação de Senha -->
+    <div class="modal fade" id="recoveryModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Recuperação de Senha</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Informe seu e-mail para receber instruções de recuperação de senha.</p>
+                    <div class="mb-3">
+                        <label for="recoveryEmail" class="form-label">E-mail</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                            <input type="email" class="form-control" id="recoveryEmail" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Cadastro -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cadastrar Nova Empresa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="registerForm" class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Nome da Empresa</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-building"></i></span>
+                                <input type="text" name="nomeEmpresa" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Tipo de Negócio</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-scissors"></i></span>
+                                <select name="tipoNegocio" class="form-select" required>
+                                    <option selected disabled value="">Selecione...</option>
+                                    <option value="salao">Salão de Beleza</option>
+                                    <option value="barbearia">Barbearia</option>
+                                    <option value="clinica">Clínica de Estética</option>
+                                    <option value="outro">Outro</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">E-mail</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                <input type="email" name="email" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">WhatsApp</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-whatsapp"></i></span>
+                                <input type="text" name="whatsapp" class="form-control" placeholder="(00) 00000-0000" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Senha</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                <input type="password" name="senha" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Confirme a Senha</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                <input type="password" name="confirmaSenha" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input class="form-check-input" name="termos" type="checkbox" required>
+                                <label class="form-check-label">
+                                    Concordo com os <a href="#" class="text-decoration-none">Termos de Serviço</a> e <a href="#" class="text-decoration-none">Política de Privacidade</a>
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" form="registerForm" class="btn btn-primary">Criar Conta</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios - BelezaPro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Mobile Nav Toggle -->
+    <div class="mobile-nav-toggle" id="mobileNavToggle">
+        <i class="bi bi-list"></i>
+    </div>
+
+    <!-- Sidebar / Menu Lateral -->
+    <nav class="sidebar">
+        <div class="sidebar-logo">
+            <img src="assets/img/logo.svg" alt="BelezaPro" width="160">
+        </div>
+        <div class="sidebar-menu">
+            <a href="dashboard.html">
+                <i class="bi bi-speedometer2"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="agenda.html">
+                <i class="bi bi-calendar3"></i>
+                <span>Agenda</span>
+            </a>
+            <a href="clientes.html">
+                <i class="bi bi-people"></i>
+                <span>Clientes</span>
+            </a>
+            <a href="equipe.html">
+                <i class="bi bi-person-badge"></i>
+                <span>Equipe</span>
+            </a>
+            <a href="servicos.html">
+                <i class="bi bi-scissors"></i>
+                <span>Serviços</span>
+            </a>
+            <a href="financeiro.html">
+                <i class="bi bi-cash-stack"></i>
+                <span>Financeiro</span>
+            </a>
+            <a href="relatorios.html" class="active">
+                <i class="bi bi-bar-chart"></i>
+                <span>Relatórios</span>
+            </a>
+            <a href="configuracoes.html">
+                <i class="bi bi-gear"></i>
+                <span>Configurações</span>
+            </a>
+            <a href="#" id="logoutBtn" class="mt-4">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sair</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <div class="main-content">
+        <!-- Header -->
+        <header class="dashboard-header d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1 class="animate-on-scroll">Relatórios</h1>
+                <p class="text-muted">Análise detalhada do seu negócio</p>
+            </div>
+            <div class="d-flex align-items-center">
+                <!-- Dark Mode Toggle -->
+                <div class="form-check form-switch me-3">
+                    <input class="form-check-input" type="checkbox" id="darkModeToggle">
+                    <label class="form-check-label" for="darkModeToggle"><i class="bi bi-moon"></i></label>
+                </div>
+                
+                <!-- Botão de Exportação -->
+                <div class="dropdown me-3">
+                    <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-download me-1"></i>Exportar
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-file-earmark-pdf me-2"></i>PDF</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-file-earmark-excel me-2"></i>Excel</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-file-earmark-text me-2"></i>CSV</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Botão de Impressão -->
+                <button class="btn btn-primary" onclick="window.print()">
+                    <i class="bi bi-printer me-2"></i>
+                    Imprimir
+                </button>
+            </div>
+        </header>
+
+        <!-- Filtros de Data -->
+        <div class="card mb-4 animate-on-scroll">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-5 mb-3 mb-md-0">
+                        <label class="form-label">Período</label>
+                        <div class="d-flex gap-2">
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-outline-primary">Hoje</button>
+                                <button type="button" class="btn btn-outline-primary">Semana</button>
+                                <button type="button" class="btn btn-outline-primary active">Mês</button>
+                                <button type="button" class="btn btn-outline-primary">Ano</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <label class="form-label">Intervalo de Datas</label>
+                        <div class="d-flex gap-2">
+                            <div class="input-group" style="width: auto;">
+                                <span class="input-group-text bg-white"><i class="bi bi-calendar3"></i></span>
+                                <input type="date" class="form-control" value="2023-08-01">
+                            </div>
+                            <span class="align-self-center">até</span>
+                            <div class="input-group" style="width: auto;">
+                                <span class="input-group-text bg-white"><i class="bi bi-calendar3"></i></span>
+                                <input type="date" class="form-control" value="2023-08-31">
+                            </div>
+                            <button class="btn btn-primary">Aplicar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Limite do Plano Gratuito -->
+        <div class="card mb-4 animate-on-scroll">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h6 class="card-title mb-0">Seu plano: <span class="badge bg-secondary">Gratuito</span></h6>
+                    <a href="planos.html" class="btn btn-primary btn-sm">Atualizar Plano</a>
+                </div>
+                <p class="small mb-2">O módulo de relatórios não está disponível no plano gratuito. Atualize para o plano profissional para acessar relatórios detalhados, comparativos e análises avançadas.</p>
+                <div class="progress" style="height: 10px;">
+                    <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Abas de Relatórios -->
+        <ul class="nav nav-tabs mb-4 animate-on-scroll" id="relatoriosTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="faturamento-tab" data-bs-toggle="tab" data-bs-target="#faturamento" type="button" role="tab" aria-controls="faturamento" aria-selected="true">Faturamento</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="servicos-tab" data-bs-toggle="tab" data-bs-target="#servicos" type="button" role="tab" aria-controls="servicos" aria-selected="false">Serviços</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="profissionais-tab" data-bs-toggle="tab" data-bs-target="#profissionais" type="button" role="tab" aria-controls="profissionais" aria-selected="false">Profissionais</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="clientes-tab" data-bs-toggle="tab" data-bs-target="#clientes" type="button" role="tab" aria-controls="clientes" aria-selected="false">Clientes</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="agendamentos-tab" data-bs-toggle="tab" data-bs-target="#agendamentos" type="button" role="tab" aria-controls="agendamentos" aria-selected="false">Agendamentos</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="relatoriosContent">
+            <!-- Relatório de Faturamento -->
+            <div class="tab-pane fade show active" id="faturamento" role="tabpanel" aria-labelledby="faturamento-tab">
+                <div class="row">
+                    <!-- Cards de Indicadores -->
+                    <div class="col-md-6 col-lg-3 mb-4">
+                        <div class="card h-100 animate-on-scroll">
+                            <div class="card-body text-center">
+                                <div class="d-flex justify-content-center mb-2">
+                                    <div class="card-icon" style="background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));">
+                                        <i class="bi bi-cash-stack"></i>
+                                    </div>
+                                </div>
+                                <h6 class="card-title mb-2">Faturamento Total</h6>
+                                <h3 class="mb-0">R$ 28.580,00</h3>
+                                <p class="small text-success mb-0">
+                                    <i class="bi bi-arrow-up"></i> 12% em relação ao mês anterior
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-3 mb-4">
+                        <div class="card h-100 animate-on-scroll">
+                            <div class="card-body text-center">
+                                <div class="d-flex justify-content-center mb-2">
+                                    <div class="card-icon" style="background: linear-gradient(135deg, #00b894, #00cec9);">
+                                        <i class="bi bi-calendar-check"></i>
+                                    </div>
+                                </div>
+                                <h6 class="card-title mb-2">Total de Atendimentos</h6>
+                                <h3 class="mb-0">235</h3>
+                                <p class="small text-success mb-0">
+                                    <i class="bi bi-arrow-up"></i> 8% em relação ao mês anterior
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-3 mb-4">
+                        <div class="card h-100 animate-on-scroll">
+                            <div class="card-body text-center">
+                                <div class="d-flex justify-content-center mb-2">
+                                    <div class="card-icon" style="background: linear-gradient(135deg, #ff9f43, #ff7675);">
+                                        <i class="bi bi-reception-4"></i>
+                                    </div>
+                                </div>
+                                <h6 class="card-title mb-2">Ticket Médio</h6>
+                                <h3 class="mb-0">R$ 121,62</h3>
+                                <p class="small text-success mb-0">
+                                    <i class="bi bi-arrow-up"></i> 4% em relação ao mês anterior
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-3 mb-4">
+                        <div class="card h-100 animate-on-scroll">
+                            <div class="card-body text-center">
+                                <div class="d-flex justify-content-center mb-2">
+                                    <div class="card-icon" style="background: linear-gradient(135deg, #0984e3, #74b9ff);">
+                                        <i class="bi bi-arrow-repeat"></i>
+                                    </div>
+                                </div>
+                                <h6 class="card-title mb-2">Taxa de Retorno</h6>
+                                <h3 class="mb-0">68%</h3>
+                                <p class="small text-danger mb-0">
+                                    <i class="bi bi-arrow-down"></i> 2% em relação ao mês anterior
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gráfico de Faturamento -->
+                <div class="card mb-4 animate-on-scroll">
+                    <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-graph-up-arrow me-2"></i>
+                            Evolução do Faturamento
+                        </h5>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-outline-primary">Diário</button>
+                            <button type="button" class="btn btn-sm btn-outline-primary">Semanal</button>
+                            <button type="button" class="btn btn-sm btn-outline-primary active">Mensal</button>
+                            <button type="button" class="btn btn-sm btn-outline-primary">Anual</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="faturamentoChart" height="300"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Faturamento por Forma de Pagamento -->
+                <div class="row mb-4">
+                    <div class="col-lg-6 mb-4 mb-lg-0 animate-on-scroll">
+                        <div class="card h-100">
+                            <div class="card-header bg-white">
+                                <h5 class="card-title mb-0">
+                                    <i class="bi bi-credit-card me-2"></i>
+                                    Faturamento por Forma de Pagamento
+                                </h5>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <div>
+                                    <canvas id="pagamentosChart" height="220"></canvas>
+                                </div>
+                                <div class="table-responsive mt-3">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Forma de Pagamento</th>
+                                                <th class="text-end">Valor</th>
+                                                <th class="text-end">%</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><i class="bi bi-credit-card text-primary me-2"></i> Cartão de Crédito</td>
+                                                <td class="text-end">R$ 14.450,00</td>
+                                                <td class="text-end">50,6%</td>
+                                            </tr>
+                                            <tr>
+                                                <td><i class="bi bi-phone text-success me-2"></i> PIX</td>
+                                                <td class="text-end">R$ 8.320,00</td>
+                                                <td class="text-end">29,1%</td>
+                                            </tr>
+                                            <tr>
+                                                <td><i class="bi bi-credit-card-2-front text-warning me-2"></i> Cartão de Débito</td>
+                                                <td class="text-end">R$ 3.570,00</td>
+                                                <td class="text-end">12,5%</td>
+                                            </tr>
+                                            <tr>
+                                                <td><i class="bi bi-cash text-danger me-2"></i> Dinheiro</td>
+                                                <td class="text-end">R$ 2.240,00</td>
+                                                <td class="text-end">7,8%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6 animate-on-scroll">
+                        <div class="card h-100">
+                            <div class="card-header bg-white">
+                                <h5 class="card-title mb-0">
+                                    <i class="bi bi-calendar3 me-2"></i>
+                                    Faturamento por Dia da Semana
+                                </h5>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <div>
+                                    <canvas id="diasSemanaChart" height="220"></canvas>
+                                </div>
+                                <div class="table-responsive mt-3">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Dia da Semana</th>
+                                                <th class="text-end">Valor</th>
+                                                <th class="text-end">Atendimentos</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Segunda-feira</td>
+                                                <td class="text-end">R$ 3.750,00</td>
+                                                <td class="text-end">32</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Terça-feira</td>
+                                                <td class="text-end">R$ 3.280,00</td>
+                                                <td class="text-end">29</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Quarta-feira</td>
+                                                <td class="text-end">R$ 3.950,00</td>
+                                                <td class="text-end">35</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Quinta-feira</td>
+                                                <td class="text-end">R$ 4.120,00</td>
+                                                <td class="text-end">38</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Sexta-feira</td>
+                                                <td class="text-end">R$ 5.150,00</td>
+                                                <td class="text-end">42</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Sábado</td>
+                                                <td class="text-end">R$ 6.850,00</td>
+                                                <td class="text-end">50</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Domingo</td>
+                                                <td class="text-end">R$ 1.480,00</td>
+                                                <td class="text-end">9</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Comparativo Mês a Mês -->
+                <div class="card mb-4 animate-on-scroll">
+                    <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-bar-chart me-2"></i>
+                            Comparativo Mês a Mês
+                        </h5>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                2023
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#">2023</a></li>
+                                <li><a class="dropdown-item" href="#">2022</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Mês</th>
+                                        <th class="text-end">Faturamento</th>
+                                        <th class="text-end">Atendimentos</th>
+                                        <th class="text-end">Ticket Médio</th>
+                                        <th class="text-end">Variação</th>
+                                        <th>Comparativo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Janeiro</td>
+                                        <td class="text-end">R$ 18.500,00</td>
+                                        <td class="text-end">160</td>
+                                        <td class="text-end">R$ 115,63</td>
+                                        <td class="text-end">-</td>
+                                        <td>
+                                            <div class="progress" style="height: 8px;">
+                                                <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fevereiro</td>
+                                        <td class="text-end">R$ 19.300,00</td>
+                                        <td class="text-end">165</td>
+                                        <td class="text-end">R$ 116,97</td>
+                                        <td class="text-end text-success">+4,3%</td>
+                                        <td>
+                                            <div class="progress" style="height: 8px;">
+                                                <div class="progress-bar" role="progressbar" style="width: 68%" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Março</td>
+                                        <td class="text-end">R$ 22.150,00</td>
+                                        <td class="text-end">185</td>
+                                        <td class="text-end">R$ 119,73</td>
+                                        <td class="text-end text-success">+14,8%</td>
+                                        <td>
+                                            <div class="progress" style="height: 8px;">
+                                                <div class="progress-bar" role="progressbar" style="width: 78%" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Abril</td>
+                                        <td class="text-end">R$ 20.800,00</td>
+                                        <td class="text-end">178</td>
+                                        <td class="text-end">R$ 116,85</td>
+                                        <td class="text-end text-danger">-6,1%</td>
+                                        <td>
+                                            <div class="progress" style="height: 8px;">
+                                                <div class="progress-bar" role="progressbar" style="width: 73%" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Maio</td>
+                                        <td class="text-end">R$ 21.450,00</td>
+                                        <td class="text-end">183</td>
+                                        <td class="text-end">R$ 117,21</td>
+                                        <td class="text-end text-success">+3,1%</td>
+                                        <td>
+                                            <div class="progress" style="height: 8px;">
+                                                <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Junho</td>
+                                        <td class="text-end">R$ 23.750,00</td>
+                                        <td class="text-end">198</td>
+                                        <td class="text-end">R$ 119,95</td>
+                                        <td class="text-end text-success">+10,7%</td>
+                                        <td>
+                                            <div class="progress" style="height: 8px;">
+                                                <div class="progress-bar" role="progressbar" style="width: 83%" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Julho</td>
+                                        <td class="text-end">R$ 25.520,00</td>
+                                        <td class="text-end">215</td>
+                                        <td class="text-end">R$ 118,70</td>
+                                        <td class="text-end text-success">+7,5%</td>
+                                        <td>
+                                            <div class="progress" style="height: 8px;">
+                                                <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Agosto</td>
+                                        <td class="text-end">R$ 28.580,00</td>
+                                        <td class="text-end">235</td>
+                                        <td class="text-end">R$ 121,62</td>
+                                        <td class="text-end text-success">+12,0%</td>
+                                        <td>
+                                            <div class="progress" style="height: 8px;">
+                                                <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Relatório de Serviços -->
+            <div class="tab-pane fade" id="servicos" role="tabpanel" aria-labelledby="servicos-tab">
+                <!-- Cards de Indicadores -->
+                <div class="row mb-4">
+                    <div class="col-md-6 col-xl-3 mb-3 animate-on-scroll">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <p class="text-muted mb-1">Total de Serviços Realizados</p>
+                                        <h3 class="stat-number mb-0">235</h3>
+                                        <p class="small text-success mb-0">
+                                            <i class="bi bi-arrow-up"></i> 9% em relação ao mês anterior
+                                        </p>
+                                    </div>
+                                    <div class="card-icon" style="background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));">
+                                        <i class="bi bi-scissors"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-xl-3 mb-3 animate-on-scroll">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <p class="text-muted mb-1">Serviço Mais Vendido</p>
+                                        <h3 class="stat-number mb-0">Corte Feminino</h3>
+                                        <p class="small mb-0">58 realizados</p>
+                                    </div>
+                                    <div class="card-icon" style="background: linear-gradient(135deg, #ff9f43, #ff7675);">
+                                        <i class="bi bi-award"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-xl-3 mb-3 animate-on-scroll">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <p class="text-muted mb-1">Categoria Mais Popular</p>
+                                        <h3 class="stat-number mb-0">Cortes</h3>
+                                        <p class="small mb-0">98 realizados (41,7%)</p>
+                                    </div>
+                                    <div class="card-icon" style="background: linear-gradient(135deg, #0984e3, #74b9ff);">
+                                        <i class="bi bi-bookmark"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-xl-3 mb-3 animate-on-scroll">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <p class="text-muted mb-1">Duração Média</p>
+                                        <h3 class="stat-number mb-0">65 min</h3>
+                                        <p class="small text-danger mb-0">
+                                            <i class="bi bi-arrow-down"></i> 3% em relação ao mês anterior
+                                        </p>
+                                    </div>
+                                    <div class="card-icon" style="background: linear-gradient(135deg, #00b894, #55efc4);">
+                                        <i class="bi bi-clock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Serviços Mais Vendidos -->
+                <div class="row mb-4">
+                    <div class="col-lg-8 mb-4 mb-lg-0 animate-on-scroll">
+                        <div class="card h-100">
+                            <div class="card-header bg-white">
+                                <h5 class="card-title mb-0">
+                                    <i class="bi bi-bar-chart me-2"></i>
+                                    Serviços Mais Vendidos
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="servicosChart" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 animate-on-scroll">
+                        <div class="card h-100">
+                            <div class="card-header bg-white">
+                                <h5 class="card-title mb-0">
+                                    <i class="bi bi-percent me-2"></i>
+                                    Distribuição por Categoria
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="categoriasChart" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tabela de Serviços -->
+                <div class="card animate-on-scroll">
+                    <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-table me-2"></i>
+                            Detalhamento por Serviço
+                        </h5>
+                        <div class="input-group" style="width: 250px;">
+                            <input type="text" class="form-control form-control-sm" placeholder="Buscar serviço...">
+                            <button class="btn btn-sm btn-outline-secondary" type="button"><i class="bi bi-search"></i></button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Serviço</th>
+                                        <th>Categoria</th>
+                                        <th class="text-end">Quantidade</th>
+                                        <th class="text-end">Preço Médio</th>
+                                        <th class="text-end">Faturamento</th>
+                                        <th class="text-end">% do Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Corte Feminino</td>
+                                        <td>Cortes</td>
+                                        <td class="text-end">58</td>
+                                        <td class="text-end">R$ 80,00</td>
+                                        <td class="text-end">R$ 4.640,00</td>
+                                        <td class="text-end">16,2%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mechas</td>
+                                        <td>Coloração</td>
+                                        <td class="text-end">35</td>
+                                        <td class="text-end">R$ 250,00</td>
+                                        <td class="text-end">R$ 8.750,00</td>
+                                        <td class="text-end">30,6%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Corte Masculino</td>
+                                        <td>Cortes</td>
+                                        <td class="text-end">40</td>
+                                        <td class="text-end">R$ 60,00</td>
+                                        <td class="text-end">R$ 2.400,00</td>
+                                        <td class="text-end">8,4%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Escova</td>
+                                        <td>Finalização</td>
+                                        <td class="text-end">32</td>
+                                        <td class="text-end">R$ 60,00</td>
+                                        <td class="text-end">R$ 1.920,00</td>
+                                        <td class="text-end">6,7%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Manicure</td>
+                                        <td>Manicure</td>
+                                        <td class="text-end">24</td>
+                                        <td class="text-end">R$ 45,00</td>
+                                        <td class="text-end">R$ 1.080,00</td>
+                                        <td class="text-end">3,8%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Hidratação Profunda</td>
+                                        <td>Tratamentos</td>
+                                        <td class="text-end">18</td>
+                                        <td class="text-end">R$ 90,00</td>
+                                        <td class="text-end">R$ 1.620,00</td>
+                                        <td class="text-end">5,7%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Coloração</td>
+                                        <td>Coloração</td>
+                                        <td class="text-end">28</td>
+                                        <td class="text-end">R$ 150,00</td>
+                                        <td class="text-end">R$ 4.200,00</td>
+                                        <td class="text-end">14,7%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Relatório de Profissionais -->
+            <div class="tab-pane fade" id="profissionais" role="tabpanel" aria-labelledby="profissionais-tab">
+                <!-- Cards de Indicadores -->
+                <div class="row mb-4">
+                    <div class="col-md-3 col-xl-3 mb-3 animate-on-scroll">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <p class="text-muted mb-1">Profissionais Ativos</p>
+                                        <h3 class="stat-number mb-0">3</h3>
+                                    </div>
+                                    <div class="card-icon">
+                                        <i class="bi bi-people"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-3 col-xl-3 mb-3 animate-on-scroll">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <p class="text-muted mb-1">Profissional Destaque</p>
+                                        <h3 class="stat-number mb-0">Maria Oliveira</h3>
+                                        <p class="small mb-0">95 atendimentos</p>
+                                    </div>
+                                    <div class="card-icon" style="background: linear-gradient(135deg, #ff9f43, #ff7675);">
+                                        <i class="bi bi-award"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-3 col-xl-3 mb-3 animate-on-scroll">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <p class="text-muted mb-1">Taxa de Ocupação</p>
+                                        <h3 class="stat-number mb-0">72%</h3>
+                                        <p class="small text-success mb-0">
+                                            <i class="bi bi-arrow-up"></i> 5% em relação ao mês anterior
+                                        </p>
+                                    </div>
+                                    <div class="card-icon" style="background: linear-gradient(135deg, #0984e3, #74b9ff);">
+                                        <i class="bi bi-calendar-check"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-3 col-xl-3 mb-3 animate-on-scroll">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <p class="text-muted mb-1">Comissões Pagas</p>
+                                        <h3 class="stat-number mb-0">R$ 8.550,00</h3>
+                                        <p class="small text-success mb-0">
+                                            <i class="bi bi-arrow-up"></i> 11% em relação ao mês anterior
+                                        </p>
+                                    </div>
+                                    <div class="card-icon" style="background: linear-gradient(135deg, #00b894, #55efc4);">
+                                        <i class="bi bi-cash"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gráfico de Desempenho -->
+                <div class="card mb-4 animate-on-scroll">
+                    <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-bar-chart me-2"></i>
+                            Desempenho por Profissional
+                        </h5>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-outline-primary active">Atendimentos</button>
+                            <button type="button" class="btn btn-sm btn-outline-primary">Faturamento</button>
+                            <button type="button" class="btn btn-sm btn-outline-primary">Comissão</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="profissionaisChart" height="300"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Detalhes por Profissional -->
+                <div class="card animate-on-scroll">
+                    <div class="card-header bg-white">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-person-badge me-2"></i>
+                            Detalhamento por Profissional
+                        </h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>Profissional</th>
+                                        <th class="text-end">Atendimentos</th>
+                                        <th class="text-end">Faturamento</th>
+                                        <th class="text-end">Comissão</th>
+                                        <th class="text-end">Ticket Médio</th>
+                                        <th class="text-end">Taxa de Ocupação</th>
+                                        <th>Especialidade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar me-2">
+                                                    <span>MO</span>
+                                                </div>
+                                                <div>Maria Oliveira</div>
+                                            </div>
+                                        </td>
+                                        <td class="text-end">95</td>
+                                        <td class="text-end">R$ 15.250,00</td>
+                                        <td class="text-end">R$ 4.575,00</td>
+                                        <td class="text-end">R$ 160,53</td>
+                                        <td class="text-end">78%</td>
+                                        <td>Cabeleireira</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar me-2" style="background: var(--secondary-color);">
+                                                    <span>JS</span>
+                                                </div>
+                                                <div>João Santos</div>
+                                            </div>
+                                        </td>
+                                        <td class="text-end">80</td>
+                                        <td class="text-end">R$ 7.950,00</td>
+                                        <td class="text-end">R$ 2.385,00</td>
+                                        <td class="text-end">R$ 99,38</td>
+                                        <td class="text-end">70%</td>
+                                        <td>Barbeiro</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar me-2" style="background: #00b894;">
+                                                    <span>LF</span>
+                                                </div>
+                                                <div>Lucia Ferreira</div>
+                                            </div>
+                                        </td>
+                                        <td class="text-end">60</td>
+                                        <td class="text-end">R$ 5.380,00</td>
+                                        <td class="text-end">R$ 1.590,00</td>
+                                        <td class="text-end">R$ 89,67</td>
+                                        <td class="text-end">68%</td>
+                                        <td>Manicure</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Relatório de Clientes -->
+            <div class="tab-pane fade" id="clientes" role="tabpanel" aria-labelledby="clientes-tab">
+                <!-- Cards de Indicadores -->
+                <div class="row mb-4">
+                    <div class="col-md-6 col-xl-3 mb-3 animate-on-scroll">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <p class="text-muted mb-1">Total de Clientes</p>
+                                        <h3 class="stat-number mb-0">378</h3>
+                                        <p class="small text-success mb-0">
+                                            <i class="bi bi-arrow-up"></i> 4% em relação ao mês anterior
+                                        </p>
+                                    </div>
+                                    <div class="card-icon">
+                                        <i class="bi bi-people"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-xl-3 mb-3 animate-on-scroll">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <p class="text-muted mb-1">Novos Clientes</p>
+                                        <h3 class="stat-number mb-0">21</h3>
+                                        <p class="small text-success mb-0">
+                                            <i class="bi bi-arrow-up"></i> 5% em relação ao mês anterior
+                                        </p>
+                                    </div>
+                                    <div class="card-icon" style="background: linear-gradient(135deg, #ff9f43, #ff7675);">
+                                        <i class="bi bi-person-plus"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-xl-3 mb-3 animate-on-scroll">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <p class="text-muted mb-1">Taxa de Retorno</p>
+                                        <h3 class="stat-number mb-0">68%</h3>
+                                        <p class="small text-danger mb-0">
+                                            <i class="bi bi-arrow-down"></i> 2% em relação ao mês anterior
+                                        </p>
+                                    </div>
+                                    <div class="card-icon" style="background: linear-gradient(135deg, #0984e3, #74b9ff);">
+                                        <i class="bi bi-arrow-repeat"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-xl-3 mb-3 animate-on-scroll">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <p class="text-muted mb-1">Gasto Médio por Cliente</p>
+                                        <h3 class="stat-number mb-0">R$ 135,50</h3>
+                                        <p class="small text-success mb-0">
+                                            <i class="bi bi-arrow-up"></i> 6% em relação ao mês anterior
+                                        </p>
+                                    </div>
+                                    <div class="card-icon" style="background: linear-gradient(135deg, #00b894, #55efc4);">
+                                        <i class="bi bi-wallet2"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gráfico de Evolução de Clientes -->
+                <div class="row mb-4">
+                    <div class="col-lg-8 mb-4 mb-lg-0 animate-on-scroll">
+                        <div class="card h-100">
+                            <div class="card-header bg-white">
+                                <h5 class="card-title mb-0">
+                                    <i class="bi bi-graph-up me-2"></i>
+                                    Evolução de Clientes
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="clientesChart" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 animate-on-scroll">
+                        <div class="card h-100">
+                            <div class="card-header bg-white">
+                                <h5 class="card-title mb-0">
+                                    <i class="bi bi-geo-alt me-2"></i>
+                                    Clientes por Região
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="regiaoChart" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Top Clientes -->
+                <div class="card animate-on-scroll">
+                    <div class="card-header bg-white">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-trophy me-2"></i>
+                            Top Clientes
+                        </h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>Cliente</th>
+                                        <th class="text-end">Visitas</th>
+                                        <th class="text-end">Gasto Total</th>
+                                        <th class="text-end">Ticket Médio</th>
+                                        <th>Última Visita</th>
+                                        <th>Serviço Favorito</th>
+                                        <th>Status Fidelidade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar me-2">
+                                                    <span>RA</span>
+                                                </div>
+                                                <div>Roberta Almeida</div>
+                                            </div>
+                                        </td>
+                                        <td class="text-end">18</td>
+                                        <td class="text-end">R$ 2.950,00</td>
+                                        <td class="text-end">R$ 163,89</td>
+                                        <td>25/08/2023</td>
+                                        <td>Mechas</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <i class="bi bi-star-fill text-warning me-1"></i>
+                                                <i class="bi bi-star-fill text-warning me-1"></i>
+                                                <i class="bi bi-star-fill text-warning me-1"></i>
+                                                <i class="bi bi-star-fill text-warning me-1"></i>
+                                                <i class="bi bi-star-fill text-warning me-1"></i>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar me-2" style="background: var(--secondary-color);">
+                                                    <span>AS</span>
+                                                </div>
+                                                <div>Ana Silva</div>
+                                            </div>
+                                        </td>
+                                        <td class="text-end">12</td>
+                                        <td class="text-end">R$ 1.650,00</td>
+                                        <td class="text-end">R$ 137,50</td>
+                                        <td>21/08/2023</td>
+                                        <td>Corte + Escova</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <i class="bi bi-star-fill text-warning me-1"></i>
+                                                <i class="bi bi-star-fill text-warning me-1"></i>
+                                                <i class="bi bi-star-fill text-warning me-1"></i>
+                                                <i class="bi bi-star text-warning me-1"></i>
+                                                <i class="bi bi-star text-warning me-1"></i>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar me-2" style="background: #00b894;">
+                                                    <span>CM</span>
+                                                </div>
+                                                <div>Carlos Mendes</div>
+                                            </div>
+                                        </td>
+                                        <td class="text-end">8</td>
+                                        <td class="text-end">R$ 720,00</td>
+                                        <td class="text-end">R$ 90,00</td>
+                                        <td>24/08/2023</td>
+                                        <td>Barba + Corte</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <i class="bi bi-star-fill text-warning me-1"></i>
+                                                <i class="bi bi-star-fill text-warning me-1"></i>
+                                                <i class="bi bi-star text-warning me-1"></i>
+                                                <i class="bi bi-star text-warning me-1"></i>
+                                                <i class="bi bi-star text-warning me-1"></i>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Relatório de Agendamentos -->
+            <div class="tab-pane fade" id="agendamentos" role="tabpanel" aria-labelledby="agendamentos-tab">
+                <!-- Cards de Indicadores -->
+                <div class="row mb-4">
+                    <div class="col-md-6 col-xl-3 mb-3 animate-on-scroll">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <p class="text-muted mb-1">Total de Agendamentos</p>
+                                        <h3 class="stat-number mb-0">235</h3>
+                                        <p class="small text-success mb-0">
+                                            <i class="bi bi-arrow-up"></i> 9% em relação ao mês anterior
+                                        </p>
+                                    </div>
+                                    <div class="card-icon">
+                                        <i class="bi bi-calendar-check"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-xl-3 mb-3 animate-on-scroll">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <p class="text-muted mb-1">Taxa de Ocupação</p>
+                                        <h3 class="stat-number mb-0">72%</h3>
+                                        <p class="small text-success mb-0">
+                                            <i class="bi bi-arrow-up"></i> 5% em relação ao mês anterior
+                                        </p>
+                                    </div>
+                                    <div class="card-icon" style="background: linear-gradient(135deg, #ff9f43, #ff7675);">
+                                        <i class="bi bi-clock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-xl-3 mb-3 animate-on-scroll">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <p class="text-muted mb-1">Taxa de Cancelamento</p>
+                                        <h3 class="stat-number mb-0">8%</h3>
+                                        <p class="small text-success mb-0">
+                                            <i class="bi bi-arrow-down"></i> 2% em relação ao mês anterior
+                                        </p>
+                                    </div>
+                                    <div class="card-icon" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
+                                        <i class="bi bi-x-circle"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-xl-3 mb-3 animate-on-scroll">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <p class="text-muted mb-1">Taxa de Ausência</p>
+                                        <h3 class="stat-number mb-0">3%</h3>
+                                        <p class="small text-success mb-0">
+                                            <i class="bi bi-arrow-down"></i> 1% em relação ao mês anterior
+                                        </p>
+                                    </div>
+                                    <div class="card-icon" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">
+                                        <i class="bi bi-person-dash"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gráfico de Agendamentos -->
+                <div class="row mb-4">
+                    <div class="col-lg-8 mb-4 mb-lg-0 animate-on-scroll">
+                        <div class="card h-100">
+                            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0">
+                                    <i class="bi bi-graph-up me-2"></i>
+                                    Agendamentos por Dia
+                                </h5>
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-sm btn-outline-primary">Dia</button>
+                                    <button type="button" class="btn btn-sm btn-outline-primary active">Semana</button>
+                                    <button type="button" class="btn btn-sm btn-outline-primary">Mês</button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="agendamentosChart" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 animate-on-scroll">
+                        <div class="card h-100">
+                            <div class="card-header bg-white">
+                                <h5 class="card-title mb-0">
+                                    <i class="bi bi-pie-chart me-2"></i>
+                                    Status de Agendamentos
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="statusChart" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Relatório de Cancelamentos -->
+                <div class="card animate-on-scroll">
+                    <div class="card-header bg-white">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-x-circle me-2"></i>
+                            Cancelamentos e Ausências
+                        </h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>Cliente</th>
+                                        <th>Serviço</th>
+                                        <th>Data/Hora</th>
+                                        <th>Profissional</th>
+                                        <th>Status</th>
+                                        <th>Motivo</th>
+                                        <th>Valor Perdido</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar me-2" style="width: 30px; height: 30px; font-size: 0.8rem;">
+                                                    <span>PG</span>
+                                                </div>
+                                                <div>Patricia Gomes</div>
+                                            </div>
+                                        </td>
+                                        <td>Manicure</td>
+                                        <td>15/08/2023 10:00</td>
+                                        <td>Lucia Ferreira</td>
+                                        <td><span class="badge bg-danger">Cancelado</span></td>
+                                        <td>Problema pessoal</td>
+                                        <td>R$ 45,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar me-2" style="width: 30px; height: 30px; font-size: 0.8rem; background: var(--secondary-color);">
+                                                    <span>MC</span>
+                                                </div>
+                                                <div>Marcos Costa</div>
+                                            </div>
+                                        </td>
+                                        <td>Corte Masculino</td>
+                                        <td>17/08/2023 14:30</td>
+                                        <td>João Santos</td>
+                                        <td><span class="badge bg-danger">Cancelado</span></td>
+                                        <td>Reagendamento</td>
+                                        <td>R$ 60,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar me-2" style="width: 30px; height: 30px; font-size: 0.8rem; background: #00b894;">
+                                                    <span>FL</span>
+                                                </div>
+                                                <div>Fernanda Lima</div>
+                                            </div>
+                                        </td>
+                                        <td>Coloração</td>
+                                        <td>22/08/2023 09:15</td>
+                                        <td>Maria Oliveira</td>
+                                        <td><span class="badge bg-secondary">Ausente</span></td>
+                                        <td>Sem aviso prévio</td>
+                                        <td>R$ 150,00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/relatorios.js"></script>
+</body>
+</html>

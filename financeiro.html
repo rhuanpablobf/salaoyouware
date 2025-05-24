@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financeiro - BelezaPro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Mobile Nav Toggle -->
+    <div class="mobile-nav-toggle" id="mobileNavToggle">
+        <i class="bi bi-list"></i>
+    </div>
+
+    <!-- Sidebar / Menu Lateral -->
+    <nav class="sidebar">
+        <div class="sidebar-logo">
+            <img src="assets/img/logo.svg" alt="BelezaPro" width="160">
+        </div>
+        <div class="sidebar-menu">
+            <a href="dashboard.html">
+                <i class="bi bi-speedometer2"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="agenda.html">
+                <i class="bi bi-calendar3"></i>
+                <span>Agenda</span>
+            </a>
+            <a href="clientes.html">
+                <i class="bi bi-people"></i>
+                <span>Clientes</span>
+            </a>
+            <a href="equipe.html">
+                <i class="bi bi-person-badge"></i>
+                <span>Equipe</span>
+            </a>
+            <a href="servicos.html">
+                <i class="bi bi-scissors"></i>
+                <span>Serviços</span>
+            </a>
+            <a href="financeiro.html" class="active">
+                <i class="bi bi-cash-stack"></i>
+                <span>Financeiro</span>
+            </a>
+            <a href="relatorios.html">
+                <i class="bi bi-bar-chart"></i>
+                <span>Relatórios</span>
+            </a>
+            <a href="configuracoes.html">
+                <i class="bi bi-gear"></i>
+                <span>Configurações</span>
+            </a>
+            <a href="#" id="logoutBtn" class="mt-4">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sair</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <div class="main-content">
+        <!-- Header -->
+        <header class="dashboard-header d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1 class="animate-on-scroll">Financeiro</h1>
+                <p class="text-muted">Gerenciamento financeiro do seu negócio</p>
+            </div>
+            <div class="d-flex align-items-center">
+                <!-- Dark Mode Toggle -->
+                <div class="form-check form-switch me-3">
+                    <input class="form-check-input" type="checkbox" id="darkModeToggle">
+                    <label class="form-check-label" for="darkModeToggle"><i class="bi bi-moon"></i></label>
+                </div>
+                
+                <div class="dropdown me-3">
+                    <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-plus-lg me-1"></i>Registrar
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#novaReceitaModal"><i class="bi bi-graph-up-arrow me-2 text-success"></i>Nova Receita</a></li>
+                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#novaDespesaModal"><i class="bi bi-graph-down-arrow me-2 text-danger"></i>Nova Despesa</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#pagarComissaoModal"><i class="bi bi-person-check me-2 text-primary"></i>Pagar Comissão</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Botão de Fechamento de Caixa -->
+                <button class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#fechamentoCaixaModal">
+                    <i class="bi bi-safe me-2"></i>
+                    Fechamento de Caixa
+                </button>
+            </div>
+        </header>
+
+        <!-- Filtros de Data -->
+        <div class="card mb-4 animate-on-scroll">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-5">
+                        <div class="d-flex gap-2">
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-outline-primary active">Hoje</button>
+                                <button type="button" class="btn btn-outline-primary">Semana</button>
+                                <button type="button" class="btn btn-outline-primary">Mês</button>
+                                <button type="button" class="btn btn-outline-primary">Personalizado</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="d-flex gap-2 justify-content-md-end mt-2 mt-md-0">
+                            <div class="input-group" style="width: auto;">
+                                <span class="input-group-text bg-white"><i class="bi bi-calendar3"></i></span>
+                                <input type="date" class="form-control" value="2023-08-25">
+                            </div>
+                            <span class="align-self-center">até</span>
+                            <div class="input-group" style="width: auto;">
+                                <span class="input-group-text bg-white"><i class="bi bi-calendar3"></i></span>
+                                <input type="date" class="form-control" value="2023-08-25">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Limite do Plano Gratuito (quando aplicável) -->
+        <div class="card mb-4 animate-on-scroll">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h6 class="card-title mb-0">Seu plano: <span class="badge bg-secondary">Gratuito</span></h6>
+                    <a href="planos.html" class="btn btn-primary btn-sm">Atualizar Plano</a>
+                </div>
+                <p class="small mb-2">O módulo financeiro não está disponível no plano gratuito. Atualize para o plano profissional para acessar relatórios financeiros detalhados, controle de despesas e comissões.</p>
+                <div class="progress" style="height: 10px;">
+                    <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resumo Financeiro -->
+        <div class="row mb-4">
+            <!-- Receitas -->
+            <div class="col-md-6 col-xl-3 mb-3 animate-on-scroll">
+                <div class="dashboard-card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <p class="text-muted mb-1">Receitas</p>
+                                <h3 class="stat-number mb-0">R$ 2.850,00</h3>
+                                <p class="small text-success mb-0">
+                                    <i class="bi bi-arrow-up"></i> 12% em relação ao dia anterior
+                                </p>
+                            </div>
+                            <div class="card-icon" style="background: linear-gradient(135deg, #2ecc71, #27ae60);">
+                                <i class="bi bi-graph-up-arrow"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Despesas -->
+            <div class="col-md-6 col-xl-3 mb-3 animate-on-scroll" style="animation-delay: 0.2s">
+                <div class="dashboard-card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <p class="text-muted mb-1">Despesas</p>
+                                <h3 class="stat-number mb-0">R$ 950,00</h3>
+                                <p class="small text-danger mb-0">
+                                    <i class="bi bi-arrow-up"></i> 5% em relação ao dia anterior
+                                </p>
+                            </div>
+                            <div class="card-icon" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
+                                <i class="bi bi-graph-down-arrow"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Lucro Líquido -->
+            <div class="col-md-6 col-xl-3 mb-3 animate-on-scroll" style="animation-delay: 0.4s">
+                <div class="dashboard-card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <p class="text-muted mb-1">Lucro Líquido</p>
+                                <h3 class="stat-number mb-0">R$ 1.900,00</h3>
+                                <p class="small text-success mb-0">
+                                    <i class="bi bi-arrow-up"></i> 15% em relação ao dia anterior
+                                </p>
+                            </div>
+                            <div class="card-icon" style="background: linear-gradient(135deg, #3498db, #2980b9);">
+                                <i class="bi bi-trophy"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Comissões a Pagar -->
+            <div class="col-md-6 col-xl-3 mb-3 animate-on-scroll" style="animation-delay: 0.6s">
+                <div class="dashboard-card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <p class="text-muted mb-1">Comissões a Pagar</p>
+                                <h3 class="stat-number mb-0">R$ 520,00</h3>
+                                <p class="small mb-0">
+                                    3 profissionais
+                                </p>
+                            </div>
+                            <div class="card-icon" style="background: linear-gradient(135deg, #f39c12, #d35400);">
+                                <i class="bi bi-people"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráfico e Movimentações -->
+        <div class="row mb-4">
+            <!-- Gráfico de Receitas e Despesas -->
+            <div class="col-lg-8 mb-4 mb-lg-0 animate-on-scroll">
+                <div class="card h-100">
+                    <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-graph-up me-2"></i>
+                            Balanço do Período
+                        </h5>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-sm btn-outline-primary active">Diário</button>
+                            <button type="button" class="btn btn-sm btn-outline-primary">Semanal</button>
+                            <button type="button" class="btn btn-sm btn-outline-primary">Mensal</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="financeChart" height="270"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Movimentações Recentes -->
+            <div class="col-lg-4 animate-on-scroll">
+                <div class="card h-100">
+                    <div class="card-header bg-white">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-clock-history me-2"></i>
+                            Movimentações Recentes
+                        </h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="list-group list-group-flush">
+                            <!-- Movimento 1 -->
+                            <div class="list-group-item border-0 border-bottom py-3">
+                                <div class="d-flex w-100 justify-content-between mb-1">
+                                    <h6 class="mb-0">Corte + Escova</h6>
+                                    <span class="text-success fw-medium">R$ 120,00</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <small class="text-body-secondary">
+                                        <i class="bi bi-person me-1"></i> Ana Silva
+                                        <i class="bi bi-person-badge ms-2 me-1"></i> Maria Oliveira
+                                    </small>
+                                    <small class="text-body-secondary">Hoje 10:30</small>
+                                </div>
+                            </div>
+                            
+                            <!-- Movimento 2 -->
+                            <div class="list-group-item border-0 border-bottom py-3">
+                                <div class="d-flex w-100 justify-content-between mb-1">
+                                    <h6 class="mb-0">Aluguel de Equipamentos</h6>
+                                    <span class="text-danger fw-medium">-R$ 350,00</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <small class="text-body-secondary">
+                                        <i class="bi bi-tag me-1"></i> Despesa Fixa
+                                    </small>
+                                    <small class="text-body-secondary">Hoje 09:15</small>
+                                </div>
+                            </div>
+                            
+                            <!-- Movimento 3 -->
+                            <div class="list-group-item border-0 border-bottom py-3">
+                                <div class="d-flex w-100 justify-content-between mb-1">
+                                    <h6 class="mb-0">Manicure + Pedicure</h6>
+                                    <span class="text-success fw-medium">R$ 90,00</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <small class="text-body-secondary">
+                                        <i class="bi bi-person me-1"></i> Roberta Almeida
+                                        <i class="bi bi-person-badge ms-2 me-1"></i> Lucia Ferreira
+                                    </small>
+                                    <small class="text-body-secondary">Hoje 09:00</small>
+                                </div>
+                            </div>
+                            
+                            <!-- Movimento 4 -->
+                            <div class="list-group-item border-0 border-bottom py-3">
+                                <div class="d-flex w-100 justify-content-between mb-1">
+                                    <h6 class="mb-0">Produtos de Limpeza</h6>
+                                    <span class="text-danger fw-medium">-R$ 75,00</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <small class="text-body-secondary">
+                                        <i class="bi bi-tag me-1"></i> Manutenção
+                                    </small>
+                                    <small class="text-body-secondary">Ontem 16:45</small>
+                                </div>
+                            </div>
+                            
+                            <!-- Movimento 5 -->
+                            <div class="list-group-item border-0 py-3">
+                                <div class="d-flex w-100 justify-content-between mb-1">
+                                    <h6 class="mb-0">Barba + Corte</h6>
+                                    <span class="text-success fw-medium">R$ 80,00</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <small class="text-body-secondary">
+                                        <i class="bi bi-person me-1"></i> Carlos Mendes
+                                        <i class="bi bi-person-badge ms-2 me-1"></i> João Santos
+                                    </small>
+                                    <small class="text-body-secondary">Ontem 15:30</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white text-center">
+                        <a href="#" class="btn btn-sm btn-outline-primary">Ver Todas as Movimentações</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comissões e Histórico de Caixa -->
+        <div class="row mb-4">
+            <!-- Comissões -->
+            <div class="col-lg-5 mb-4 mb-lg-0 animate-on-scroll">
+                <div class="card h-100">
+                    <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-people me-2"></i>
+                            Comissões
+                        </h5>
+                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#pagarComissaoModal">
+                            Pagar
+                        </button>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table align-middle mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Profissional</th>
+                                        <th>Atendimentos</th>
+                                        <th>Comissão</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Profissional 1 -->
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar me-2" style="width: 30px; height: 30px; font-size: 0.8rem;">
+                                                    <span>MO</span>
+                                                </div>
+                                                <div>Maria Oliveira</div>
+                                            </div>
+                                        </td>
+                                        <td>12</td>
+                                        <td>R$ 250,00</td>
+                                        <td><span class="badge bg-warning text-dark">Pendente</span></td>
+                                    </tr>
+                                    
+                                    <!-- Profissional 2 -->
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar me-2" style="width: 30px; height: 30px; font-size: 0.8rem; background: var(--secondary-color);">
+                                                    <span>JS</span>
+                                                </div>
+                                                <div>João Santos</div>
+                                            </div>
+                                        </td>
+                                        <td>8</td>
+                                        <td>R$ 180,00</td>
+                                        <td><span class="badge bg-warning text-dark">Pendente</span></td>
+                                    </tr>
+                                    
+                                    <!-- Profissional 3 -->
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar me-2" style="width: 30px; height: 30px; font-size: 0.8rem; background: #00b894;">
+                                                    <span>LF</span>
+                                                </div>
+                                                <div>Lucia Ferreira</div>
+                                            </div>
+                                        </td>
+                                        <td>6</td>
+                                        <td>R$ 90,00</td>
+                                        <td><span class="badge bg-warning text-dark">Pendente</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Histórico de Fechamento de Caixa -->
+            <div class="col-lg-7 animate-on-scroll">
+                <div class="card h-100">
+                    <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-safe me-2"></i>
+                            Histórico de Fechamento de Caixa
+                        </h5>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Agosto 2023
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#">Agosto 2023</a></li>
+                                <li><a class="dropdown-item" href="#">Julho 2023</a></li>
+                                <li><a class="dropdown-item" href="#">Junho 2023</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table align-middle mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Data</th>
+                                        <th>Receitas</th>
+                                        <th>Despesas</th>
+                                        <th>Saldo</th>
+                                        <th>Status</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Fechamento 1 -->
+                                    <tr>
+                                        <td>24/08/2023</td>
+                                        <td class="text-success">R$ 2.680,00</td>
+                                        <td class="text-danger">R$ 890,00</td>
+                                        <td><strong>R$ 1.790,00</strong></td>
+                                        <td><span class="badge bg-success">Fechado</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="Ver Detalhes">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Fechamento 2 -->
+                                    <tr>
+                                        <td>23/08/2023</td>
+                                        <td class="text-success">R$ 2.450,00</td>
+                                        <td class="text-danger">R$ 950,00</td>
+                                        <td><strong>R$ 1.500,00</strong></td>
+                                        <td><span class="badge bg-success">Fechado</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="Ver Detalhes">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Fechamento 3 -->
+                                    <tr>
+                                        <td>22/08/2023</td>
+                                        <td class="text-success">R$ 2.120,00</td>
+                                        <td class="text-danger">R$ 780,00</td>
+                                        <td><strong>R$ 1.340,00</strong></td>
+                                        <td><span class="badge bg-success">Fechado</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="Ver Detalhes">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Fechamento 4 -->
+                                    <tr>
+                                        <td>21/08/2023</td>
+                                        <td class="text-success">R$ 1.950,00</td>
+                                        <td class="text-danger">R$ 650,00</td>
+                                        <td><strong>R$ 1.300,00</strong></td>
+                                        <td><span class="badge bg-success">Fechado</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="Ver Detalhes">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Nova Receita -->
+    <div class="modal fade" id="novaReceitaModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nova Receita</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="receitaForm">
+                        <div class="mb-3">
+                            <label for="receitaDescricao" class="form-label">Descrição <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="receitaDescricao" required>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="receitaValor" class="form-label">Valor (R$) <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text">R$</span>
+                                    <input type="number" class="form-control" id="receitaValor" min="0.01" step="0.01" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="receitaData" class="form-label">Data <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" id="receitaData" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="receitaCategoria" class="form-label">Categoria</label>
+                            <select class="form-select" id="receitaCategoria">
+                                <option value="servico" selected>Serviço</option>
+                                <option value="produto">Venda de Produto</option>
+                                <option value="voucher">Voucher/Vale-Presente</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="receitaCliente" class="form-label">Cliente</label>
+                                <select class="form-select" id="receitaCliente">
+                                    <option value="" selected>Selecione um cliente</option>
+                                    <option value="1">Ana Silva</option>
+                                    <option value="2">Carlos Mendes</option>
+                                    <option value="3">Roberta Almeida</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="receitaProfissional" class="form-label">Profissional</label>
+                                <select class="form-select" id="receitaProfissional">
+                                    <option value="" selected>Selecione um profissional</option>
+                                    <option value="1">Maria Oliveira</option>
+                                    <option value="2">João Santos</option>
+                                    <option value="3">Lucia Ferreira</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="receitaFormaPagamento" class="form-label">Forma de Pagamento <span class="text-danger">*</span></label>
+                            <select class="form-select" id="receitaFormaPagamento" required>
+                                <option value="" selected disabled>Selecione a forma de pagamento</option>
+                                <option value="dinheiro">Dinheiro</option>
+                                <option value="pix">PIX</option>
+                                <option value="credito">Cartão de Crédito</option>
+                                <option value="debito">Cartão de Débito</option>
+                                <option value="transferencia">Transferência Bancária</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="receitaObservacoes" class="form-label">Observações</label>
+                            <textarea class="form-control" id="receitaObservacoes" rows="2"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" form="receitaForm" class="btn btn-success">Registrar Receita</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Nova Despesa -->
+    <div class="modal fade" id="novaDespesaModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nova Despesa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="despesaForm">
+                        <div class="mb-3">
+                            <label for="despesaDescricao" class="form-label">Descrição <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="despesaDescricao" required>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="despesaValor" class="form-label">Valor (R$) <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text">R$</span>
+                                    <input type="number" class="form-control" id="despesaValor" min="0.01" step="0.01" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="despesaData" class="form-label">Data <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" id="despesaData" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="despesaCategoria" class="form-label">Categoria</label>
+                            <select class="form-select" id="despesaCategoria">
+                                <option value="aluguel">Aluguel</option>
+                                <option value="produtos" selected>Produtos</option>
+                                <option value="servicos">Serviços</option>
+                                <option value="equipamentos">Equipamentos</option>
+                                <option value="marketing">Marketing</option>
+                                <option value="salarios">Salários/Comissões</option>
+                                <option value="impostos">Impostos</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="despesaFormaPagamento" class="form-label">Forma de Pagamento <span class="text-danger">*</span></label>
+                            <select class="form-select" id="despesaFormaPagamento" required>
+                                <option value="" selected disabled>Selecione a forma de pagamento</option>
+                                <option value="dinheiro">Dinheiro</option>
+                                <option value="pix">PIX</option>
+                                <option value="credito">Cartão de Crédito</option>
+                                <option value="debito">Cartão de Débito</option>
+                                <option value="transferencia">Transferência Bancária</option>
+                                <option value="boleto">Boleto Bancário</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="despesaRepetir" class="form-label">Repetir</label>
+                            <select class="form-select" id="despesaRepetir">
+                                <option value="nao" selected>Não repetir</option>
+                                <option value="semanal">Semanalmente</option>
+                                <option value="mensal">Mensalmente</option>
+                                <option value="anual">Anualmente</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="despesaObservacoes" class="form-label">Observações</label>
+                            <textarea class="form-control" id="despesaObservacoes" rows="2"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" form="despesaForm" class="btn btn-danger">Registrar Despesa</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Pagar Comissão -->
+    <div class="modal fade" id="pagarComissaoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Pagar Comissão</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="comissaoForm">
+                        <div class="mb-3">
+                            <label for="comissaoProfissional" class="form-label">Profissional <span class="text-danger">*</span></label>
+                            <select class="form-select" id="comissaoProfissional" required>
+                                <option value="" selected disabled>Selecione o profissional</option>
+                                <option value="1" data-valor="250.00">Maria Oliveira - R$ 250,00</option>
+                                <option value="2" data-valor="180.00">João Santos - R$ 180,00</option>
+                                <option value="3" data-valor="90.00">Lucia Ferreira - R$ 90,00</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="comissaoPeriodo" class="form-label">Período</label>
+                            <select class="form-select" id="comissaoPeriodo">
+                                <option value="atual" selected>Período Atual</option>
+                                <option value="personalizado">Período Personalizado</option>
+                            </select>
+                        </div>
+                        
+                        <div id="periodosPersonalizados" class="row mb-3 d-none">
+                            <div class="col-md-6">
+                                <label for="comissaoDataInicio" class="form-label">Data Início</label>
+                                <input type="date" class="form-control" id="comissaoDataInicio">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="comissaoDataFim" class="form-label">Data Fim</label>
+                                <input type="date" class="form-control" id="comissaoDataFim">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="comissaoValor" class="form-label">Valor (R$) <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text">R$</span>
+                                <input type="number" class="form-control" id="comissaoValor" min="0.01" step="0.01" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="comissaoFormaPagamento" class="form-label">Forma de Pagamento <span class="text-danger">*</span></label>
+                            <select class="form-select" id="comissaoFormaPagamento" required>
+                                <option value="" selected disabled>Selecione a forma de pagamento</option>
+                                <option value="dinheiro">Dinheiro</option>
+                                <option value="pix">PIX</option>
+                                <option value="transferencia">Transferência Bancária</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="comissaoObservacoes" class="form-label">Observações</label>
+                            <textarea class="form-control" id="comissaoObservacoes" rows="2"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" form="comissaoForm" class="btn btn-primary">Realizar Pagamento</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Fechamento de Caixa -->
+    <div class="modal fade" id="fechamentoCaixaModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Fechamento de Caixa - 25/08/2023</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h6 class="card-subtitle mb-2 text-muted">Receitas do Dia</h6>
+                                    <h3 class="mb-0 text-success">R$ 2.850,00</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h6 class="card-subtitle mb-2 text-muted">Despesas do Dia</h6>
+                                    <h3 class="mb-0 text-danger">R$ 950,00</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <h6 class="card-subtitle mb-2 text-muted">Saldo do Dia</h6>
+                                    <h3 class="mb-0">R$ 1.900,00</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <h6 class="mb-3">Receitas por Forma de Pagamento</h6>
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <i class="bi bi-cash me-2"></i> Dinheiro
+                                    </div>
+                                    <span>R$ 750,00</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <i class="bi bi-credit-card me-2"></i> Cartão de Crédito
+                                    </div>
+                                    <span>R$ 1.250,00</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <i class="bi bi-credit-card-2-front me-2"></i> Cartão de Débito
+                                    </div>
+                                    <span>R$ 450,00</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <i class="bi bi-phone me-2"></i> PIX
+                                    </div>
+                                    <span>R$ 400,00</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="mb-3">Conferência de Caixa</h6>
+                            <form id="conferenciaCaixaForm">
+                                <div class="mb-3">
+                                    <label for="valorSistemaDinheiro" class="form-label">Dinheiro em Caixa (Sistema)</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">R$</span>
+                                        <input type="number" class="form-control" id="valorSistemaDinheiro" value="750.00" readonly>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="valorRealDinheiro" class="form-label">Dinheiro em Caixa (Real) <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">R$</span>
+                                        <input type="number" class="form-control" id="valorRealDinheiro" min="0" step="0.01" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="observacoesCaixa" class="form-label">Observações</label>
+                                    <textarea class="form-control" id="observacoesCaixa" rows="3" placeholder="Informe qualquer divergência ou observação sobre o fechamento do caixa..."></textarea>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="fecharCaixaBtn">Fechar Caixa</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/financeiro.js"></script>
+</body>
+</html>

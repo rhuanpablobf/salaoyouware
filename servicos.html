@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serviços - BelezaPro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Mobile Nav Toggle -->
+    <div class="mobile-nav-toggle" id="mobileNavToggle">
+        <i class="bi bi-list"></i>
+    </div>
+
+    <!-- Sidebar / Menu Lateral -->
+    <nav class="sidebar">
+        <div class="sidebar-logo">
+            <img src="assets/img/logo.svg" alt="BelezaPro" width="160">
+        </div>
+        <div class="sidebar-menu">
+            <a href="dashboard.html">
+                <i class="bi bi-speedometer2"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="agenda.html">
+                <i class="bi bi-calendar3"></i>
+                <span>Agenda</span>
+            </a>
+            <a href="clientes.html">
+                <i class="bi bi-people"></i>
+                <span>Clientes</span>
+            </a>
+            <a href="equipe.html">
+                <i class="bi bi-person-badge"></i>
+                <span>Equipe</span>
+            </a>
+            <a href="servicos.html" class="active">
+                <i class="bi bi-scissors"></i>
+                <span>Serviços</span>
+            </a>
+            <a href="financeiro.html">
+                <i class="bi bi-cash-stack"></i>
+                <span>Financeiro</span>
+            </a>
+            <a href="relatorios.html">
+                <i class="bi bi-bar-chart"></i>
+                <span>Relatórios</span>
+            </a>
+            <a href="configuracoes.html">
+                <i class="bi bi-gear"></i>
+                <span>Configurações</span>
+            </a>
+            <a href="#" id="logoutBtn" class="mt-4">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sair</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <div class="main-content">
+        <!-- Header -->
+        <header class="dashboard-header d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1 class="animate-on-scroll">Serviços</h1>
+                <p class="text-muted">Gerencie os serviços oferecidos pelo seu negócio</p>
+            </div>
+            <div class="d-flex align-items-center">
+                <!-- Dark Mode Toggle -->
+                <div class="form-check form-switch me-3">
+                    <input class="form-check-input" type="checkbox" id="darkModeToggle">
+                    <label class="form-check-label" for="darkModeToggle"><i class="bi bi-moon"></i></label>
+                </div>
+                
+                <div class="dropdown me-3">
+                    <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-plus-lg me-1"></i> Novo
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#novoServicoModal"><i class="bi bi-scissors me-2"></i>Novo Serviço</a></li>
+                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#novaCategoriaModal"><i class="bi bi-bookmark-plus me-2"></i>Nova Categoria</a></li>
+                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#novoComboModal"><i class="bi bi-box me-2"></i>Novo Combo</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Botão de Busca -->
+                <button class="btn btn-primary d-flex align-items-center" data-bs-toggle="collapse" data-bs-target="#collapseFiltros" aria-expanded="false">
+                    <i class="bi bi-search me-2"></i>
+                    Buscar Serviços
+                </button>
+            </div>
+        </header>
+
+        <!-- Filtros de Busca -->
+        <div class="collapse mb-4" id="collapseFiltros">
+            <div class="card animate-on-scroll">
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Busca</label>
+                            <input type="text" class="form-control" placeholder="Digite o nome do serviço...">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Categoria</label>
+                            <select class="form-select">
+                                <option value="all">Todas as categorias</option>
+                                <option value="cortes">Cortes</option>
+                                <option value="coloracao">Coloração</option>
+                                <option value="penteados">Penteados</option>
+                                <option value="tratamentos">Tratamentos</option>
+                                <option value="manicure">Manicure e Pedicure</option>
+                                <option value="depilacao">Depilação</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Status</label>
+                            <select class="form-select">
+                                <option value="all">Todos</option>
+                                <option value="actives" selected>Ativos</option>
+                                <option value="inactives">Inativos</option>
+                            </select>
+                        </div>
+                        <div class="col-12 d-flex justify-content-end">
+                            <button type="button" class="btn btn-outline-secondary me-2">Limpar Filtros</button>
+                            <button type="button" class="btn btn-primary">Buscar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Limite do Plano Gratuito (quando aplicável) -->
+        <div class="card mb-4 animate-on-scroll">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h6 class="card-title mb-0">Seu plano: <span class="badge bg-secondary">Gratuito</span></h6>
+                    <a href="planos.html" class="btn btn-primary btn-sm">Atualizar Plano</a>
+                </div>
+                <p class="small mb-2">O plano gratuito permite um número ilimitado de serviços, mas você está limitado a 5 agendamentos por mês.</p>
+                <div class="progress" style="height: 10px;">
+                    <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Abas de Categorias -->
+        <ul class="nav nav-tabs mb-4 animate-on-scroll">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Todos os Serviços</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Cortes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Coloração</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Penteados</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Tratamentos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Manicure</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                    Mais
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Depilação</a></li>
+                    <li><a class="dropdown-item" href="#">Design de Sobrancelhas</a></li>
+                    <li><a class="dropdown-item" href="#">Maquiagem</a></li>
+                    <li><a class="dropdown-item" href="#">Massagens</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Combos</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <!-- Tabela de Serviços -->
+        <div class="card mb-4 animate-on-scroll">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>Serviço</th>
+                                <th>Categoria</th>
+                                <th>Duração</th>
+                                <th>Preço</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Serviço 1 -->
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="me-3 rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: rgba(138, 43, 226, 0.1);">
+                                            <i class="bi bi-scissors" style="color: var(--primary-color);"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-0">Corte Feminino</h6>
+                                            <span class="text-muted small">Com finalização básica</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Cortes</td>
+                                <td>60 min</td>
+                                <td>R$ 80,00</td>
+                                <td><span class="badge bg-success">Ativo</span></td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editarServicoModal"><i class="bi bi-pencil me-2"></i>Editar</a></li>
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-eye-slash me-2"></i>Desativar</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item text-danger" href="#" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"><i class="bi bi-trash me-2"></i>Excluir</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <!-- Serviço 2 -->
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="me-3 rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: rgba(138, 43, 226, 0.1);">
+                                            <i class="bi bi-scissors" style="color: var(--primary-color);"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-0">Corte Masculino</h6>
+                                            <span class="text-muted small">Tesoura ou máquina</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Cortes</td>
+                                <td>30 min</td>
+                                <td>R$ 60,00</td>
+                                <td><span class="badge bg-success">Ativo</span></td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Editar</a></li>
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-eye-slash me-2"></i>Desativar</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>Excluir</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <!-- Serviço 3 -->
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="me-3 rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: rgba(235, 77, 75, 0.1);">
+                                            <i class="bi bi-palette" style="color: #eb4d4b;"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-0">Coloração Completa</h6>
+                                            <span class="text-muted small">Com produtos L'Oréal</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Coloração</td>
+                                <td>90 min</td>
+                                <td>R$ 150,00</td>
+                                <td><span class="badge bg-success">Ativo</span></td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Editar</a></li>
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-eye-slash me-2"></i>Desativar</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>Excluir</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <!-- Serviço 4 -->
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="me-3 rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: rgba(235, 77, 75, 0.1);">
+                                            <i class="bi bi-palette" style="color: #eb4d4b;"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-0">Mechas</h6>
+                                            <span class="text-muted small">Ombré hair, balayage</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Coloração</td>
+                                <td>180 min</td>
+                                <td>R$ 250,00</td>
+                                <td><span class="badge bg-success">Ativo</span></td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Editar</a></li>
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-eye-slash me-2"></i>Desativar</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>Excluir</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <!-- Serviço 5 -->
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="me-3 rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: rgba(58, 83, 155, 0.1);">
+                                            <i class="bi bi-droplet" style="color: #3a539b;"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-0">Hidratação Profunda</h6>
+                                            <span class="text-muted small">Com máscara e escova</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Tratamentos</td>
+                                <td>45 min</td>
+                                <td>R$ 90,00</td>
+                                <td><span class="badge bg-success">Ativo</span></td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Editar</a></li>
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-eye-slash me-2"></i>Desativar</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>Excluir</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <!-- Serviço 6 -->
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="me-3 rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: rgba(16, 172, 132, 0.1);">
+                                            <i class="bi bi-hand-index-thumb" style="color: #10ac84;"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-0">Manicure</h6>
+                                            <span class="text-muted small">Cutilagem e esmaltação</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Manicure</td>
+                                <td>45 min</td>
+                                <td>R$ 45,00</td>
+                                <td><span class="badge bg-success">Ativo</span></td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Editar</a></li>
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-eye-slash me-2"></i>Desativar</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>Excluir</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <!-- Serviço 7 -->
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="me-3 rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: rgba(16, 172, 132, 0.1);">
+                                            <i class="bi bi-hand-index-thumb" style="color: #10ac84;"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-0">Pedicure</h6>
+                                            <span class="text-muted small">Esfoliação e hidratação</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Manicure</td>
+                                <td>60 min</td>
+                                <td>R$ 55,00</td>
+                                <td><span class="badge bg-secondary">Inativo</span></td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Editar</a></li>
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>Ativar</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>Excluir</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <!-- Serviço 8 (Combo) -->
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="me-3 rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: rgba(255, 159, 67, 0.1);">
+                                            <i class="bi bi-box" style="color: #ff9f43;"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-0">Combo Dia da Noiva</h6>
+                                            <span class="text-muted small">Inclui maquiagem, penteado e manicure</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Combos</td>
+                                <td>240 min</td>
+                                <td>R$ E450,00</td>
+                                <td><span class="badge bg-success">Ativo</span></td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editarComboModal"><i class="bi bi-pencil me-2"></i>Editar</a></li>
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-eye-slash me-2"></i>Desativar</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>Excluir</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer bg-white">
+                <nav>
+                    <ul class="pagination justify-content-center mb-0">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Próxima</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Novo Serviço -->
+    <div class="modal fade" id="novoServicoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Novo Serviço</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="servicoForm">
+                        <div class="mb-3">
+                            <label for="servicoNome" class="form-label">Nome do Serviço <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="servicoNome" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="servicoDescricao" class="form-label">Descrição</label>
+                            <textarea class="form-control" id="servicoDescricao" rows="2"></textarea>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="servicoCategoria" class="form-label">Categoria <span class="text-danger">*</span></label>
+                                <select class="form-select" id="servicoCategoria" required>
+                                    <option value="" selected disabled>Selecione</option>
+                                    <option value="cortes">Cortes</option>
+                                    <option value="coloracao">Coloração</option>
+                                    <option value="penteados">Penteados</option>
+                                    <option value="tratamentos">Tratamentos</option>
+                                    <option value="manicure">Manicure</option>
+                                    <option value="depilacao">Depilação</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="servicoDuracao" class="form-label">Duração (min) <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="servicoDuracao" min="5" step="5" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="servicoPreco" class="form-label">Preço (R$) <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text">R$</span>
+                                    <input type="number" class="form-control" id="servicoPreco" min="0" step="0.01" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="servicoComissao" class="form-label">Comissão Padrão (%)</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="servicoComissao" min="0" max="100" value="40">
+                                    <span class="input-group-text">%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="servicoAtivo" checked>
+                            <label class="form-check-label" for="servicoAtivo">
+                                Serviço ativo
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" form="servicoForm" class="btn btn-primary">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Editar Serviço -->
+    <div class="modal fade" id="editarServicoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Serviço</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editarServicoForm">
+                        <div class="mb-3">
+                            <label for="editarServicoNome" class="form-label">Nome do Serviço <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="editarServicoNome" value="Corte Feminino" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="editarServicoDescricao" class="form-label">Descrição</label>
+                            <textarea class="form-control" id="editarServicoDescricao" rows="2">Com finalização básica</textarea>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="editarServicoCategoria" class="form-label">Categoria <span class="text-danger">*</span></label>
+                                <select class="form-select" id="editarServicoCategoria" required>
+                                    <option value="cortes" selected>Cortes</option>
+                                    <option value="coloracao">Coloração</option>
+                                    <option value="penteados">Penteados</option>
+                                    <option value="tratamentos">Tratamentos</option>
+                                    <option value="manicure">Manicure</option>
+                                    <option value="depilacao">Depilação</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="editarServicoDuracao" class="form-label">Duração (min) <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="editarServicoDuracao" min="5" step="5" value="60" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="editarServicoPreco" class="form-label">Preço (R$) <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text">R$</span>
+                                    <input type="number" class="form-control" id="editarServicoPreco" min="0" step="0.01" value="80" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="editarServicoComissao" class="form-label">Comissão Padrão (%)</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="editarServicoComissao" min="0" max="100" value="40">
+                                    <span class="input-group-text">%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="editarServicoAtivo" checked>
+                            <label class="form-check-label" for="editarServicoAtivo">
+                                Serviço ativo
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" form="editarServicoForm" class="btn btn-primary">Salvar Alterações</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Nova Categoria -->
+    <div class="modal fade" id="novaCategoriaModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nova Categoria</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="categoriaForm">
+                        <div class="mb-3">
+                            <label for="categoriaNome" class="form-label">Nome da Categoria <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="categoriaNome" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="categoriaDescricao" class="form-label">Descrição</label>
+                            <textarea class="form-control" id="categoriaDescricao" rows="2"></textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Cor da Categoria</label>
+                            <div class="d-flex gap-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="categoriaColor" id="color1" value="#8A2BE2" checked style="width: 20px; height: 20px; background-color: #8A2BE2; border-color: #8A2BE2;">
+                                    <label class="form-check-label" for="color1"></label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="categoriaColor" id="color2" value="#eb4d4b" style="width: 20px; height: 20px; background-color: #eb4d4b; border-color: #eb4d4b;">
+                                    <label class="form-check-label" for="color2"></label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="categoriaColor" id="color3" value="#10ac84" style="width: 20px; height: 20px; background-color: #10ac84; border-color: #10ac84;">
+                                    <label class="form-check-label" for="color3"></label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="categoriaColor" id="color4" value="#3a539b" style="width: 20px; height: 20px; background-color: #3a539b; border-color: #3a539b;">
+                                    <label class="form-check-label" for="color4"></label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="categoriaColor" id="color5" value="#ff9f43" style="width: 20px; height: 20px; background-color: #ff9f43; border-color: #ff9f43;">
+                                    <label class="form-check-label" for="color5"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" form="categoriaForm" class="btn btn-primary">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Novo Combo -->
+    <div class="modal fade" id="novoComboModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Novo Combo de Serviços</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="comboForm">
+                        <div class="row g-3">
+                            <div class="col-md-12 mb-2">
+                                <label for="comboNome" class="form-label">Nome do Combo <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="comboNome" required>
+                            </div>
+                            
+                            <div class="col-md-12 mb-2">
+                                <label for="comboDescricao" class="form-label">Descrição</label>
+                                <textarea class="form-control" id="comboDescricao" rows="2"></textarea>
+                            </div>
+                            
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label">Serviços Incluídos <span class="text-danger">*</span></label>
+                                <div class="table-responsive">
+                                    <table class="table table-sm border">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th style="width: 50px;">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="checkAllServicos">
+                                                        <label class="form-check-label" for="checkAllServicos"></label>
+                                                    </div>
+                                                </th>
+                                                <th>Serviço</th>
+                                                <th>Duração</th>
+                                                <th>Preço Individual</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input combo-service" type="checkbox" value="1" data-duracao="60" data-preco="80">
+                                                    </div>
+                                                </td>
+                                                <td>Corte Feminino</td>
+                                                <td>60 min</td>
+                                                <td>R$ 80,00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input combo-service" type="checkbox" value="3" data-duracao="90" data-preco="150">
+                                                    </div>
+                                                </td>
+                                                <td>Coloração</td>
+                                                <td>90 min</td>
+                                                <td>R$ 150,00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input combo-service" type="checkbox" value="5" data-duracao="45" data-preco="90">
+                                                    </div>
+                                                </td>
+                                                <td>Hidratação Profunda</td>
+                                                <td>45 min</td>
+                                                <td>R$ 90,00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input combo-service" type="checkbox" value="6" data-duracao="45" data-preco="45">
+                                                    </div>
+                                                </td>
+                                                <td>Manicure</td>
+                                                <td>45 min</td>
+                                                <td>R$ 45,00</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4 mb-2">
+                                <label class="form-label">Tempo Total</label>
+                                <input type="text" class="form-control-plaintext" readonly value="0 min" id="comboTempoTotal">
+                            </div>
+                            
+                            <div class="col-md-4 mb-2">
+                                <label class="form-label">Valor Total Individual</label>
+                                <input type="text" class="form-control-plaintext" readonly value="R$ 0,00" id="comboPrecoIndividual">
+                            </div>
+                            
+                            <div class="col-md-4 mb-2">
+                                <label for="comboDesconto" class="form-label">Desconto (%)</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="comboDesconto" min="0" max="100" value="10">
+                                    <span class="input-group-text">%</span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12">
+                                <div class="alert alert-info">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span>Preço Final do Combo:</span>
+                                        <span class="fw-bold" id="comboPrecoFinal">R$ 0,00</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="comboAtivo" checked>
+                                    <label class="form-check-label" for="comboAtivo">
+                                        Combo ativo
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" form="comboForm" class="btn btn-primary">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Editar Combo -->
+    <div class="modal fade" id="editarComboModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Combo de Serviços</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editarComboForm">
+                        <div class="row g-3">
+                            <div class="col-md-12 mb-2">
+                                <label for="editarComboNome" class="form-label">Nome do Combo <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="editarComboNome" value="Combo Dia da Noiva" required>
+                            </div>
+                            
+                            <div class="col-md-12 mb-2">
+                                <label for="editarComboDescricao" class="form-label">Descrição</label>
+                                <textarea class="form-control" id="editarComboDescricao" rows="2">Inclui maquiagem, penteado e manicure</textarea>
+                            </div>
+                            
+                            <!-- Serviços incluídos similar ao modal de novo combo, mas com valores pré-selecionados -->
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label">Serviços Incluídos <span class="text-danger">*</span></label>
+                                <div class="table-responsive">
+                                    <table class="table table-sm border">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th style="width: 50px;">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="editarCheckAllServicos">
+                                                    </div>
+                                                </th>
+                                                <th>Serviço</th>
+                                                <th>Duração</th>
+                                                <th>Preço Individual</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Serviços com alguns já selecionados para o combo existente -->
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input combo-service" type="checkbox" checked data-duracao="120" data-preco="250">
+                                                    </div>
+                                                </td>
+                                                <td>Maquiagem para Noivas</td>
+                                                <td>120 min</td>
+                                                <td>R$ 250,00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input combo-service" type="checkbox" checked data-duracao="120" data-preco="200">
+                                                    </div>
+                                                </td>
+                                                <td>Penteado para Noivas</td>
+                                                <td>120 min</td>
+                                                <td>R$ 200,00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input combo-service" type="checkbox" checked data-duracao="45" data-preco="45">
+                                                    </div>
+                                                </td>
+                                                <td>Manicure</td>
+                                                <td>45 min</td>
+                                                <td>R$ 45,00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input combo-service" type="checkbox" data-duracao="45" data-preco="90">
+                                                    </div>
+                                                </td>
+                                                <td>Hidratação Profunda</td>
+                                                <td>45 min</td>
+                                                <td>R$ 90,00</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4 mb-2">
+                                <label class="form-label">Tempo Total</label>
+                                <input type="text" class="form-control-plaintext" readonly value="285 min" id="editarComboTempoTotal">
+                            </div>
+                            
+                            <div class="col-md-4 mb-2">
+                                <label class="form-label">Valor Total Individual</label>
+                                <input type="text" class="form-control-plaintext" readonly value="R$ 495,00" id="editarComboPrecoIndividual">
+                            </div>
+                            
+                            <div class="col-md-4 mb-2">
+                                <label for="editarComboDesconto" class="form-label">Desconto (%)</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="editarComboDesconto" min="0" max="100" value="10">
+                                    <span class="input-group-text">%</span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12">
+                                <div class="alert alert-info">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span>Preço Final do Combo:</span>
+                                        <span class="fw-bold" id="editarComboPrecoFinal">R$ 450,00</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="editarComboAtivo" checked>
+                                    <label class="form-check-label" for="editarComboAtivo">
+                                        Combo ativo
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" form="editarComboForm" class="btn btn-primary">Salvar Alterações</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmação de Exclusão -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmar Exclusão</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Tem certeza que deseja excluir o serviço <strong>Corte Feminino</strong>?</p>
+                    <p class="text-danger"><i class="bi bi-exclamation-triangle me-1"></i> Esta ação não pode ser desfeita e pode afetar agendamentos existentes.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger">Excluir Serviço</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/servicos.js"></script>
+</body>
+</html>

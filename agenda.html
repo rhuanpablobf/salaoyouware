@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda - BelezaPro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-light">
+    <!-- Sidebar / Menu Lateral -->
+    <nav class="sidebar">
+        <div class="sidebar-logo">
+            <img src="assets/img/logo.svg" alt="BelezaPro" width="140">
+        </div>
+        <div class="sidebar-menu">
+            <a href="dashboard.html">
+                <i class="bi bi-speedometer2"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="agenda.html" class="active">
+                <i class="bi bi-calendar3"></i>
+                <span>Agenda</span>
+            </a>
+            <a href="clientes.html">
+                <i class="bi bi-people"></i>
+                <span>Clientes</span>
+            </a>
+            <a href="equipe.html">
+                <i class="bi bi-person-badge"></i>
+                <span>Equipe</span>
+            </a>
+            <a href="servicos.html">
+                <i class="bi bi-scissors"></i>
+                <span>Serviços</span>
+            </a>
+            <a href="financeiro.html">
+                <i class="bi bi-cash-stack"></i>
+                <span>Financeiro</span>
+            </a>
+            <a href="relatorios.html">
+                <i class="bi bi-bar-chart"></i>
+                <span>Relatórios</span>
+            </a>
+            <a href="configuracoes.html">
+                <i class="bi bi-gear"></i>
+                <span>Configurações</span>
+            </a>
+            <a href="#" id="logoutBtn" class="mt-auto">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sair</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <div class="main-content">
+        <!-- Header -->
+        <header class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1 class="h3 mb-0">Agenda</h1>
+                <p class="text-muted">Gerencie os agendamentos e horários</p>
+            </div>
+            <div class="d-flex">
+                <!-- Botão para Novo Agendamento -->
+                <button type="button" class="btn btn-primary d-flex align-items-center me-2" data-bs-toggle="modal" data-bs-target="#novoAgendamentoModal">
+                    <i class="bi bi-plus-circle me-2"></i>
+                    Novo Agendamento
+                </button>
+                
+                <!-- Botão para Novo Cliente -->
+                <button type="button" class="btn btn-outline-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#novoClienteModal">
+                    <i class="bi bi-person-plus me-2"></i>
+                    Novo Cliente
+                </button>
+            </div>
+        </header>
+
+        <!-- Filtros -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row g-3">
+                    <!-- Data -->
+                    <div class="col-lg-3">
+                        <label class="form-label">Data</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white"><i class="bi bi-calendar3"></i></span>
+                            <input type="date" class="form-control border-start-0" value="2023-08-25">
+                        </div>
+                    </div>
+                    
+                    <!-- Profissional -->
+                    <div class="col-lg-3">
+                        <label class="form-label">Profissional</label>
+                        <select class="form-select">
+                            <option value="todos" selected>Todos os profissionais</option>
+                            <option value="1">Maria Oliveira</option>
+                            <option value="2">João Santos</option>
+                            <option value="3">Lucia Ferreira</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Serviço -->
+                    <div class="col-lg-3">
+                        <label class="form-label">Serviço</label>
+                        <select class="form-select">
+                            <option value="todos" selected>Todos os serviços</option>
+                            <option value="1">Corte Feminino</option>
+                            <option value="2">Corte Masculino</option>
+                            <option value="3">Manicure</option>
+                            <option value="4">Pedicure</option>
+                            <option value="5">Escova</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Status -->
+                    <div class="col-lg-3">
+                        <label class="form-label">Status</label>
+                        <select class="form-select">
+                            <option value="todos" selected>Todos os status</option>
+                            <option value="pendente">Pendente</option>
+                            <option value="confirmado">Confirmado</option>
+                            <option value="concluido">Concluído</option>
+                            <option value="cancelado">Cancelado</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Limite do Plano Gratuito (se aplicável) -->
+        <div class="card mb-4 bg-light">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h6 class="card-title mb-0">Seu plano: <span class="badge bg-secondary">Gratuito</span></h6>
+                    <a href="planos.html" class="btn btn-sm btn-outline-primary">Atualizar Plano</a>
+                </div>
+                <p class="small mb-2">Você usou 3 de 5 agendamentos este mês</p>
+                <div class="progress" style="height: 10px;">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Agenda por Profissional -->
+        <div class="card mb-4">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+                <h5 class="card-title mb-0">Agenda do Dia - 25/08/2023</h5>
+                <div>
+                    <button class="btn btn-sm btn-outline-secondary me-2">
+                        <i class="bi bi-arrow-left"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-secondary">
+                        <i class="bi bi-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <!-- Profissional 1 -->
+                <div class="p-3 border-bottom">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="avatar me-3 rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                            <span>MO</span>
+                        </div>
+                        <div>
+                            <h6 class="mb-0">Maria Oliveira</h6>
+                            <span class="text-muted small">Cabeleireira</span>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex overflow-auto pb-2">
+                        <!-- Hora vazia -->
+                        <div class="schedule-hour text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">08:00</div>
+                            <div class="small text-muted">Disponível</div>
+                        </div>
+                        
+                        <!-- Hora com agendamento -->
+                        <div class="schedule-hour occupied text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">09:00</div>
+                            <div class="small">Ana Silva</div>
+                            <div class="small text-muted">Corte + Escova</div>
+                        </div>
+                        
+                        <!-- Hora vazia -->
+                        <div class="schedule-hour text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">10:00</div>
+                            <div class="small text-muted">Disponível</div>
+                        </div>
+                        
+                        <!-- Hora com agendamento -->
+                        <div class="schedule-hour occupied text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">11:00</div>
+                            <div class="small">Fernanda Lima</div>
+                            <div class="small text-muted">Coloração</div>
+                        </div>
+                        
+                        <!-- Hora de almoço -->
+                        <div class="schedule-hour break text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">12:00</div>
+                            <div class="small">Almoço</div>
+                        </div>
+                        
+                        <!-- Hora vazia -->
+                        <div class="schedule-hour text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">13:00</div>
+                            <div class="small text-muted">Disponível</div>
+                        </div>
+                        
+                        <!-- Hora vazia -->
+                        <div class="schedule-hour text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">14:00</div>
+                            <div class="small text-muted">Disponível</div>
+                        </div>
+                        
+                        <!-- Hora com agendamento -->
+                        <div class="schedule-hour occupied text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">15:00</div>
+                            <div class="small">Mariana Costa</div>
+                            <div class="small text-muted">Mechas</div>
+                        </div>
+                        
+                        <!-- Hora com agendamento -->
+                        <div class="schedule-hour occupied text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">16:00</div>
+                            <div class="small">Juliana Mendes</div>
+                            <div class="small text-muted">Corte Feminino</div>
+                        </div>
+                        
+                        <!-- Hora vazia -->
+                        <div class="schedule-hour text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">17:00</div>
+                            <div class="small text-muted">Disponível</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Profissional 2 -->
+                <div class="p-3 border-bottom">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="avatar me-3 rounded-circle bg-info text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                            <span>JS</span>
+                        </div>
+                        <div>
+                            <h6 class="mb-0">João Santos</h6>
+                            <span class="text-muted small">Barbeiro</span>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex overflow-auto pb-2">
+                        <!-- Hora vazia -->
+                        <div class="schedule-hour text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">08:00</div>
+                            <div class="small text-muted">Disponível</div>
+                        </div>
+                        
+                        <!-- Hora vazia -->
+                        <div class="schedule-hour text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">09:00</div>
+                            <div class="small text-muted">Disponível</div>
+                        </div>
+                        
+                        <!-- Hora com agendamento -->
+                        <div class="schedule-hour occupied text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">10:30</div>
+                            <div class="small">Carlos Mendes</div>
+                            <div class="small text-muted">Barba + Cabelo</div>
+                        </div>
+                        
+                        <!-- Hora vazia -->
+                        <div class="schedule-hour text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">11:30</div>
+                            <div class="small text-muted">Disponível</div>
+                        </div>
+                        
+                        <!-- Hora de almoço -->
+                        <div class="schedule-hour break text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">12:30</div>
+                            <div class="small">Almoço</div>
+                        </div>
+                        
+                        <!-- Hora com agendamento -->
+                        <div class="schedule-hour occupied text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">13:30</div>
+                            <div class="small">Ricardo Silva</div>
+                            <div class="small text-muted">Corte Masculino</div>
+                        </div>
+                        
+                        <!-- Hora vazia -->
+                        <div class="schedule-hour text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">14:30</div>
+                            <div class="small text-muted">Disponível</div>
+                        </div>
+                        
+                        <!-- Hora vazia -->
+                        <div class="schedule-hour text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">15:30</div>
+                            <div class="small text-muted">Disponível</div>
+                        </div>
+                        
+                        <!-- Hora com agendamento -->
+                        <div class="schedule-hour occupied text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">16:30</div>
+                            <div class="small">Lucas Ferreira</div>
+                            <div class="small text-muted">Barba</div>
+                        </div>
+                        
+                        <!-- Hora vazia -->
+                        <div class="schedule-hour text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">17:30</div>
+                            <div class="small text-muted">Disponível</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Profissional 3 -->
+                <div class="p-3">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="avatar me-3 rounded-circle bg-success text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                            <span>LF</span>
+                        </div>
+                        <div>
+                            <h6 class="mb-0">Lucia Ferreira</h6>
+                            <span class="text-muted small">Manicure</span>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex overflow-auto pb-2">
+                        <!-- Hora vazia -->
+                        <div class="schedule-hour text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">09:00</div>
+                            <div class="small text-muted">Disponível</div>
+                        </div>
+                        
+                        <!-- Hora vazia -->
+                        <div class="schedule-hour text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">10:00</div>
+                            <div class="small text-muted">Disponível</div>
+                        </div>
+                        
+                        <!-- Hora com agendamento -->
+                        <div class="schedule-hour occupied text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">11:00</div>
+                            <div class="small">Patricia Gomes</div>
+                            <div class="small text-muted">Manicure</div>
+                        </div>
+                        
+                        <!-- Hora de almoço -->
+                        <div class="schedule-hour break text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">12:00</div>
+                            <div class="small">Almoço</div>
+                        </div>
+                        
+                        <!-- Hora com agendamento -->
+                        <div class="schedule-hour occupied text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">13:00</div>
+                            <div class="small">Roberta Almeida</div>
+                            <div class="small text-muted">Manicure + Pedicure</div>
+                        </div>
+                        
+                        <!-- Hora vazia -->
+                        <div class="schedule-hour text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">14:30</div>
+                            <div class="small text-muted">Disponível</div>
+                        </div>
+                        
+                        <!-- Hora com agendamento -->
+                        <div class="schedule-hour occupied text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">15:30</div>
+                            <div class="small">Sandra Ribeiro</div>
+                            <div class="small text-muted">Pedicure</div>
+                        </div>
+                        
+                        <!-- Hora vazia -->
+                        <div class="schedule-hour text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">16:30</div>
+                            <div class="small text-muted">Disponível</div>
+                        </div>
+                        
+                        <!-- Hora vazia -->
+                        <div class="schedule-hour text-center mx-1" style="min-width: 120px;">
+                            <div class="fw-bold">17:30</div>
+                            <div class="small text-muted">Disponível</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Novo Agendamento -->
+    <div class="modal fade" id="novoAgendamentoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Novo Agendamento</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="agendamentoForm">
+                        <div class="row g-3">
+                            <!-- Cliente -->
+                            <div class="col-md-6">
+                                <label class="form-label">Cliente</label>
+                                <select class="form-select" required>
+                                    <option selected disabled value="">Selecione o cliente</option>
+                                    <option>Ana Silva</option>
+                                    <option>Carlos Mendes</option>
+                                    <option>Roberta Almeida</option>
+                                    <option>Patricia Gomes</option>
+                                    <option>Ricardo Silva</option>
+                                    <!-- Opção para novo cliente -->
+                                    <option value="novo_cliente" class="fw-bold">+ Adicionar Novo Cliente</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Serviço -->
+                            <div class="col-md-6">
+                                <label class="form-label">Serviço</label>
+                                <select class="form-select" required>
+                                    <option selected disabled value="">Selecione o serviço</option>
+                                    <option>Corte Feminino</option>
+                                    <option>Corte Masculino</option>
+                                    <option>Barba</option>
+                                    <option>Escova</option>
+                                    <option>Coloração</option>
+                                    <option>Mechas</option>
+                                    <option>Manicure</option>
+                                    <option>Pedicure</option>
+                                    <option>Manicure + Pedicure</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Profissional -->
+                            <div class="col-md-6">
+                                <label class="form-label">Profissional</label>
+                                <select class="form-select" required>
+                                    <option selected disabled value="">Selecione o profissional</option>
+                                    <option>Maria Oliveira</option>
+                                    <option>João Santos</option>
+                                    <option>Lucia Ferreira</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Data -->
+                            <div class="col-md-6">
+                                <label class="form-label">Data</label>
+                                <input type="date" class="form-control" required>
+                            </div>
+                            
+                            <!-- Hora inicial -->
+                            <div class="col-md-6">
+                                <label class="form-label">Horário Início</label>
+                                <select class="form-select" required>
+                                    <option selected disabled value="">Selecione o horário</option>
+                                    <option>08:00</option>
+                                    <option>08:30</option>
+                                    <option>09:00</option>
+                                    <option>09:30</option>
+                                    <option>10:00</option>
+                                    <option>10:30</option>
+                                    <option>11:00</option>
+                                    <option>11:30</option>
+                                    <option>13:00</option>
+                                    <option>13:30</option>
+                                    <option>14:00</option>
+                                    <option>14:30</option>
+                                    <option>15:00</option>
+                                    <option>15:30</option>
+                                    <option>16:00</option>
+                                    <option>16:30</option>
+                                    <option>17:00</option>
+                                    <option>17:30</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Status -->
+                            <div class="col-md-6">
+                                <label class="form-label">Status</label>
+                                <select class="form-select" required>
+                                    <option value="pendente" selected>Pendente</option>
+                                    <option value="confirmado">Confirmado</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Observações -->
+                            <div class="col-12">
+                                <label class="form-label">Observações</label>
+                                <textarea class="form-control" rows="3" placeholder="Informações adicionais sobre o agendamento..."></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" form="agendamentoForm" class="btn btn-primary">Agendar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal de Novo Cliente -->
+    <div class="modal fade" id="novoClienteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Novo Cliente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="clienteForm">
+                        <div class="row g-3">
+                            <!-- Nome -->
+                            <div class="col-md-6">
+                                <label class="form-label">Nome Completo</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                            
+                            <!-- Celular/WhatsApp -->
+                            <div class="col-md-6">
+                                <label class="form-label">Celular / WhatsApp</label>
+                                <input type="text" class="form-control" placeholder="(00) 00000-0000" required>
+                            </div>
+                            
+                            <!-- E-mail -->
+                            <div class="col-md-6">
+                                <label class="form-label">E-mail</label>
+                                <input type="email" class="form-control">
+                            </div>
+                            
+                            <!-- Data de Nascimento -->
+                            <div class="col-md-6">
+                                <label class="form-label">Data de Nascimento</label>
+                                <input type="date" class="form-control">
+                            </div>
+                            
+                            <!-- Endereço -->
+                            <div class="col-12">
+                                <label class="form-label">Endereço</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            
+                            <!-- Observações -->
+                            <div class="col-12">
+                                <label class="form-label">Observações</label>
+                                <textarea class="form-control" rows="3" placeholder="Preferências, alergias, referências..."></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" form="clienteForm" class="btn btn-primary">Cadastrar Cliente</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/agenda.js"></script>
+</body>
+</html>
