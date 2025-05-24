@@ -35,29 +35,49 @@ document.addEventListener('DOMContentLoaded', async function() {
             });
             
             // Carregar dados reais do servidor
-            const userId = JSON.parse(localStorage.getItem('user_data'))?._id;
-            const empresaId = JSON.parse(localStorage.getItem('user_data'))?.empresaId;
+            const userData = JSON.parse(localStorage.getItem('user_data'));
+            const userId = userData?._id;
+            const empresaId = userData?.empresaId;
             
             if (!userId || !empresaId) {
                 throw new Error('Dados do usuário não encontrados');
+            }
+            
+            // Atualizar nome do usuário no dashboard
+            const userNameElement = document.getElementById('userName');
+            if (userNameElement && userData) {
+                userNameElement.textContent = userData.nome || 'Usuário';
+            }
+            
+            // Mostrar carregamento
+            const loadingMessage = document.createElement('div');
+            loadingMessage.className = 'alert alert-info text-center';
+            loadingMessage.textContent = 'Carregando dados...';
+            const mainContent = document.querySelector('.main-content');
+            if (mainContent) {
+                mainContent.insertBefore(loadingMessage, mainContent.firstChild);
             }
             
             // Buscar dados reais da API
             try {
                 // Obter agendamentos
                 const agendamentosResponse = await fetchAPI('agenda');
+                console.log('Resposta de agendamentos:', agendamentosResponse);
                 const agendamentos = agendamentosResponse?.data || [];
                 
                 // Obter clientes
                 const clientesResponse = await fetchAPI('clientes');
+                console.log('Resposta de clientes:', clientesResponse);
                 const clientes = clientesResponse?.data || [];
                 
                 // Obter dados financeiros
                 const financeiroResponse = await fetchAPI('financeiro/resumo');
+                console.log('Resposta de financeiro:', financeiroResponse);
                 const financeiro = financeiroResponse?.data || {};
                 
                 // Obter empresa
-                const empresaResponse = await fetchAPI(`empresas`);
+                const empresaResponse = await fetchAPI('empresas');
+                console.log('Resposta de empresa:', empresaResponse);
                 const empresa = empresaResponse?.data || {};
                 
                 // Montar objeto de dados do dashboard

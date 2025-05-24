@@ -1,6 +1,46 @@
 // Helper functions
 const API_URL = 'https://belezapro-backend.onrender.com/api';
 
+// Verificar conexão com a API
+(async function checkApiConnection() {
+    try {
+        const response = await fetch(`${API_URL}/auth/check`, { 
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+        });
+        
+        if (response.ok) {
+            console.log('✅ Conexão com API estabelecida com sucesso!');
+        } else {
+            console.warn('⚠️ API respondeu, mas com status:', response.status);
+        }
+    } catch (error) {
+        console.error('❌ Erro ao conectar com a API:', error);
+        // Mostrar um alerta para o usuário
+        setTimeout(() => {
+            if (document.readyState === 'complete' || document.readyState === 'interactive') {
+                showApiError();
+            } else {
+                document.addEventListener('DOMContentLoaded', showApiError);
+            }
+        }, 2000);
+    }
+})();
+
+// Mostrar erro de conexão com a API
+function showApiError() {
+    // Verificar se já existe um alerta
+    if (document.querySelector('.api-error-alert')) return;
+    
+    const alertDiv = document.createElement('div');
+    alertDiv.className = 'api-error-alert alert alert-danger alert-dismissible fade show fixed-top w-100 text-center';
+    alertDiv.innerHTML = `
+        <strong>Erro de conexão!</strong> Não foi possível conectar ao servidor. Verifique sua internet ou tente novamente mais tarde.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+    document.body.appendChild(alertDiv);
+}
+
 // Loading Animation
 document.addEventListener('DOMContentLoaded', function() {
     // Show loading overlay
