@@ -26,85 +26,67 @@ document.addEventListener('DOMContentLoaded', async function() {
     // Função para carregar dados do dashboard
     async function loadDashboardData() {
         try {
-            // Em produção, você faria uma requisição real para a API
-            // const dashboardData = await fetchAPI('dashboard');
+            // Limpar dados existentes
+            updateStats({
+                agendamentosHoje: 0,
+                clientesTotal: 0,
+                faturamentoMes: 'R$ 0,00',
+                servicosRealizados: 0
+            });
             
-            // Dados simulados
-            const dashboardData = {
-                stats: {
-                    agendamentosHoje: 8,
-                    clientesTotal: 156,
-                    faturamentoMes: 'R$ 5.480,00',
-                    servicosRealizados: 42
-                },
-                charts: {
-                    agendamentos: {
-                        labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'],
-                        data: [5, 7, 10, 8, 12, 15, 6]
+            // Carregar dados reais do servidor
+            const userId = JSON.parse(localStorage.getItem('user_data'))?._id;
+            const empresaId = JSON.parse(localStorage.getItem('user_data'))?.empresaId;
+            
+            if (!userId || !empresaId) {
+                throw new Error('Dados do usuário não encontrados');
+            }
+            
+            // Buscar dados reais da API
+            try {
+                // Obter agendamentos
+                const agendamentosResponse = await fetchAPI('agenda');
+                const agendamentos = agendamentosResponse?.data || [];
+                
+                // Obter clientes
+                const clientesResponse = await fetchAPI('clientes');
+                const clientes = clientesResponse?.data || [];
+                
+                // Obter dados financeiros
+                const financeiroResponse = await fetchAPI('financeiro/resumo');
+                const financeiro = financeiroResponse?.data || {};
+                
+                // Obter empresa
+                const empresaResponse = await fetchAPI(`empresas`);
+                const empresa = empresaResponse?.data || {};
+                
+                // Montar objeto de dados do dashboard
+                const dashboardData = {
+                    stats: {
+                        agendamentosHoje: agendamentos.filter(a => {
+                            const hoje = new Date().toISOString().split('T')[0];
+                            return a.data?.split('T')[0] === hoje;
+                        }).length || 0,
+                        clientesTotal: clientes.length || 0,
+                        faturamentoMes: `R$ ${(financeiro.faturamentoMensal || 0).toLocaleString('pt-BR', {minimumFractionDigits: 2})}`,
+                        servicosRealizados: agendamentos.filter(a => a.status === 'concluido').length || 0
                     },
-                    faturamento: {
-                        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
-                        data: [3200, 4100, 3800, 5100, 4700, 5480]
-                    }
-                },
-                proximosAgendamentos: [
-                    {
-                        id: 1,
-                        cliente: 'Ana Silva',
-                        servico: 'Corte de Cabelo',
-                        horario: '14:30',
-                        data: '2023-10-15',
-                        status: 'confirmado'
+                    charts: {
+                        agendamentos: {
+                            labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'],
+                            data: [0, 0, 0, 0, 0, 0, 0] // Estes dados seriam calculados com base nos agendamentos
+                        },
+                        faturamento: {
+                            labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                            data: [0, 0, 0, 0, 0, 0] // Estes dados seriam calculados com base nos financeiros
+                        }
                     },
-                    {
-                        id: 2,
-                        cliente: 'Carlos Mendes',
-                        servico: 'Barba',
-                        horario: '15:45',
-                        data: '2023-10-15',
-                        status: 'pendente'
-                    },
-                    {
-                        id: 3,
-                        cliente: 'Mariana Costa',
-                        servico: 'Coloração',
-                        horario: '10:00',
-                        data: '2023-10-16',
-                        status: 'confirmado'
-                    },
-                    {
-                        id: 4,
-                        cliente: 'João Paulo',
-                        servico: 'Barba + Corte',
-                        horario: '16:30',
-                        data: '2023-10-16',
-                        status: 'pendente'
-                    }
-                ],
-                ultimosClientes: [
-                    {
-                        id: 1,
-                        nome: 'Fernanda Oliveira',
-                        email: 'fernanda@email.com',
-                        telefone: '(11) 98765-4321',
-                        dataRegistro: '2023-10-12'
-                    },
-                    {
-                        id: 2,
-                        nome: 'Roberto Almeida',
-                        email: 'roberto@email.com',
-                        telefone: '(11) 99876-5432',
-                        dataRegistro: '2023-10-10'
-                    },
-                    {
-                        id: 3,
-                        nome: 'Camila Santos',
-                        email: 'camila@email.com',
-                        telefone: '(11) 91234-5678',
-                        dataRegistro: '2023-10-08'
-                    }
-                ]
-            };
+                    proximosAgendamentos: agendamentos
+                        .filter(a => a.status !== 'cancelado' && a.status !== 'concluido')
+                        .slice(0, 5) || [],
+                    ultimosClientes: clientes.slice(0, 5) || [],
+                    empresa: empresa
+                };
 
             // Atualizar estatísticas
             updateStats(dashboardData.stats);
@@ -114,9 +96,60 @@ document.addEventListener('DOMContentLoaded', async function() {
             
             // Atualizar listas
             updateLists(dashboardData.proximosAgendamentos, dashboardData.ultimosClientes);
+            
+            // Atualizar informações da empresa
+            if (dashboardData.empresa) {
+                // Atualizar o nome da empresa na página
+                document.title = `Dashboard - ${dashboardData.empresa.nome || 'BelezaPro'}`;
+                
+                // Atualizar informações do plano
+                if (dashboardData.empresa.plano) {
+                    const planoElemento = document.querySelector('.card-title .badge');
+                    if (planoElemento) {
+                        planoElemento.textContent = dashboardData.empresa.plano.charAt(0).toUpperCase() + dashboardData.empresa.plano.slice(1);
+                    }
+                    
+                    // Atualizar barra de progresso do plano
+                    if (dashboardData.empresa.planoDetalhes) {
+                        const textoPlano = document.querySelector('.card .small.mb-2');
+                        const barraProgresso = document.querySelector('.progress .progress-bar');
+                        
+                        if (textoPlano && barraProgresso) {
+                            const usados = dashboardData.empresa.planoDetalhes.agendamentosUsados || 0;
+                            const limite = dashboardData.empresa.planoDetalhes.limiteAgendamentos || 5;
+                            const porcentagem = Math.min(Math.round((usados / limite) * 100), 100);
+                            
+                            textoPlano.textContent = `Você usou ${usados} de ${limite} agendamentos este mês`;
+                            barraProgresso.style.width = `${porcentagem}%`;
+                            barraProgresso.setAttribute('aria-valuenow', porcentagem);
+                        }
+                    }
+                }
+            }
         } catch (error) {
             console.error('Erro ao carregar dados do dashboard:', error);
-            showMessage('Erro ao carregar dados do dashboard', 'error');
+            showMessage('Erro ao carregar dados do dashboard: ' + error.message, 'error');
+            
+            // Usar dados vazios em caso de erro
+            updateStats({
+                agendamentosHoje: 0,
+                clientesTotal: 0,
+                faturamentoMes: 'R$ 0,00',
+                servicosRealizados: 0
+            });
+            
+            updateCharts({
+                agendamentos: {
+                    labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'],
+                    data: [0, 0, 0, 0, 0, 0, 0]
+                },
+                faturamento: {
+                    labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                    data: [0, 0, 0, 0, 0, 0]
+                }
+            });
+            
+            updateLists([], []);
         }
     }
 

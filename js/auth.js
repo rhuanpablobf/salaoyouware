@@ -338,10 +338,22 @@ document.addEventListener('DOMContentLoaded', function() {
         handleRegistration();
         handlePasswordRecovery();
         
-        // Configura botão de logout
+        // Configura botões de logout
         const logoutBtn = document.getElementById('logoutBtn');
+        const logoutDropdownBtn = document.getElementById('logoutDropdownBtn');
+        
         if (logoutBtn) {
-            logoutBtn.addEventListener('click', logout);
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                logout();
+            });
+        }
+        
+        if (logoutDropdownBtn) {
+            logoutDropdownBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                logout();
+            });
         }
         
         // Verifica autenticação em cada página
